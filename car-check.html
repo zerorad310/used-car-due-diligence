@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Purchase Job Card — UAE Used Car Checks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f4ef;
+    --ink:#1b2430;
+    --ink-soft:#4b5563;
+    --line:#d8d2c4;
+    --safety:#e8590c;
+    --pass:#2b7a3d;
+    --warn:#b3820f;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',system-ui,sans-serif;
+    font-variation-settings:'wdth' 92;
+    line-height:1.55;
+    min-height:100vh;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px}
+
+  /* ---------- header ---------- */
+  header{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:28px}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--safety);font-weight:600;margin-bottom:6px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,44px);font-weight:850;line-height:1.05;
+    font-variation-settings:'wdth' 80;letter-spacing:-.01em;
+  }
+  .sub{color:var(--ink-soft);margin-top:10px;max-width:60ch;font-size:15px}
+
+  /* ---------- form ---------- */
+  .intake{
+    background:var(--card);border:1.5px solid var(--ink);border-radius:4px;
+    padding:22px;margin-bottom:34px;
+    box-shadow:4px 4px 0 rgba(27,36,48,.12);
+  }
+  .intake-title{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .intake-title::after{content:"";flex:1;border-top:1px dashed var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+  label{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px;
+  }
+  select,input{
+    width:100%;padding:10px 12px;font-family:'Archivo',sans-serif;font-size:15px;
+    border:1.5px solid var(--ink);border-radius:3px;background:#fff;color:var(--ink);
+  }
+  select:focus,input:focus{outline:3px solid rgba(232,89,12,.35);outline-offset:1px}
+  button{
+    margin-top:18px;width:100%;padding:14px;cursor:pointer;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;letter-spacing:.02em;
+    background:var(--ink);color:var(--paper);border:none;border-radius:3px;
+    transition:transform .08s ease, background .15s ease;
+  }
+  button:hover{background:var(--safety)}
+  button:active{transform:translateY(1px)}
+  button:focus-visible{outline:3px solid var(--safety);outline-offset:2px}
+
+  /* ---------- job card output ---------- */
+  #result{display:none}
+  .jobcard{
+    background:var(--card);border:1.5px solid var(--ink);border-radius:4px;
+    box-shadow:4px 4px 0 rgba(27,36,48,.12);overflow:hidden;
+  }
+  .jc-head{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    padding:20px 22px;border-bottom:2px solid var(--ink);flex-wrap:wrap;
+  }
+  .jc-car{font-size:22px;font-weight:850;font-variation-settings:'wdth' 82}
+  .jc-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-top:4px}
+  .stamp{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;padding:8px 14px;border:2px solid;border-radius:3px;
+    transform:rotate(-2deg);white-space:nowrap;align-self:center;
+  }
+  .stamp.risk-low{color:var(--pass);border-color:var(--pass)}
+  .stamp.risk-med{color:var(--warn);border-color:var(--warn)}
+  .stamp.risk-high{color:var(--safety);border-color:var(--safety)}
+
+  .section{padding:18px 22px;border-bottom:1px solid var(--line)}
+  .section:last-of-type{border-bottom:none}
+  .sec-title{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-title::after{content:"";flex:1;border-top:1px dashed var(--line)}
+  .check{
+    display:grid;grid-template-columns:auto 1fr;gap:10px 12px;
+    padding:9px 0;border-bottom:1px dotted var(--line);align-items:start;
+  }
+  .check:last-child{border-bottom:none}
+  .box{
+    width:17px;height:17px;border:1.8px solid var(--ink);border-radius:2px;
+    margin-top:3px;flex-shrink:0;cursor:pointer;position:relative;
+  }
+  .check.done .box::after{
+    content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--safety);
+  }
+  .check.done .ct{text-decoration:line-through;color:var(--ink-soft)}
+  .ct{font-size:14.5px}
+  .ct b{font-weight:700}
+  .tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    font-weight:600;letter-spacing:.08em;padding:1px 6px;border-radius:2px;
+    margin-right:6px;vertical-align:1px;text-transform:uppercase;
+  }
+  .tag.must{background:var(--safety);color:#fff}
+  .tag.check{background:var(--warn);color:#fff}
+  .tag.note{background:var(--ink-soft);color:#fff}
+
+  .verdict{
+    padding:18px 22px;background:var(--ink);color:var(--paper);
+    font-size:14.5px;line-height:1.6;
+  }
+  .verdict b{color:#ffb38a}
+
+  .actions{display:flex;gap:10px;margin-top:16px}
+  .actions button{margin-top:0;width:auto;padding:11px 18px;font-size:14px}
+  .actions .ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .actions .ghost:hover{background:var(--ink);color:var(--paper)}
+
+  footer{
+    margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    color:var(--ink-soft);line-height:1.7;border-top:1px solid var(--line);padding-top:14px;
+  }
+
+  @media print{
+    body{background:#fff}
+    .intake,.actions,footer,header .sub{display:none}
+    .jobcard{box-shadow:none;border-width:1px}
+    .wrap{padding:0}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">UAE Used Car · Pre-Purchase</div>
+    <h1>Inspection Job Card</h1>
+    <p class="sub">Enter the car. Get the checks that matter for its age, mileage, and known model issues — tuned for Gulf heat and the Dubai used market. Print it, take it to the viewing, tick as you go.</p>
+  </header>
+
+  <div class="intake">
+    <div class="intake-title">Vehicle intake</div>
+    <div class="grid">
+      <div>
+        <label for="brand">Brand</label>
+        <select id="brand"></select>
+      </div>
+      <div>
+        <label for="model">Model</label>
+        <select id="model"></select>
+      </div>
+      <div>
+        <label for="year">Make year</label>
+        <input id="year" type="number" min="1995" max="2026" placeholder="2017">
+      </div>
+      <div>
+        <label for="km">Mileage (km)</label>
+        <input id="km" type="number" min="0" step="1000" placeholder="145000">
+      </div>
+    </div>
+    <button id="go">Generate job card</button>
+  </div>
+
+  <div id="result">
+    <div class="jobcard">
+      <div class="jc-head">
+        <div>
+          <div class="jc-car" id="jcCar"></div>
+          <div class="jc-meta" id="jcMeta"></div>
+        </div>
+        <div class="stamp" id="jcStamp"></div>
+      </div>
+      <div id="jcSections"></div>
+      <div class="verdict" id="jcVerdict"></div>
+    </div>
+    <div class="actions">
+      <button id="printBtn">Print job card</button>
+      <button class="ghost" id="resetBtn">New car</button>
+    </div>
+  </div>
+
+  <footer>
+    Rule of thumb: paper history is a bonus, the AED&nbsp;300 independent inspection is the requirement. Never pay before it. A seller who resists inspection has answered your question.<br>
+    General guidance only — always verify recalls by VIN with the official dealer.
+  </footer>
+</div>
+
+<script>
+/* ---------------- data ---------------- */
+const DB = {
+  "Mazda": {
+    "6": [
+      {yr:[2013,2013], tag:"note", txt:"<b>First year of the 3rd generation.</b> Early-build teething issues and now the oldest, most heat-aged examples. Prefer 2016+."},
+      {yr:[2014,2015], tag:"check", txt:"<b>Infotainment freezes / ghost touch</b> — test the screen thoroughly, including while driving over bumps."},
+      {yr:[2014,2015], tag:"check", txt:"<b>Early brake disc warping</b> — brake firmly from 100 km/h on the test drive; steering-wheel shudder means discs."},
+      {yr:[2013,2017], tag:"note", txt:"<b>Thin paint</b> on this generation — inspect bonnet and bumper edges for chips and cheap resprays."},
+      {yr:[2018,2021], tag:"must", txt:"<b>Cylinder-deactivation rocker arm campaign</b> — confirm any service campaign was done (VIN check at dealer). Listen for misfires / rough idle when warm."},
+      {yr:[2018,2019], tag:"must", txt:"<b>Denso fuel pump recall</b> — verify completion by VIN with Galadari (free)."}
+    ],
+    "3": [
+      {yr:[2004,2019], tag:"must", txt:"<b>Engine trim check:</b> GCC base trims used the old 1.6L MZR + 4-speed auto — underpowered and thirstier. Only buy the <b>2.0L Skyactiv-G with 6-speed auto</b>. Verify on engine cover and VIN, not the listing."},
+      {yr:[2014,2016], tag:"check", txt:"<b>Infotainment freezes</b> — same unit as the 6; test thoroughly."}
+    ],
+    "CX-5": [
+      {yr:[2012,2016], tag:"check", txt:"<b>Daytime running light / headlight failures</b> on early cars — check all lighting."},
+      {yr:[2012,2015], tag:"note", txt:"Early cars now heat-aged; budget for suspension bushings and AC service."}
+    ]
+  },
+  "Lexus": {
+    "IS 250": [
+      {yr:[2006,2015], tag:"must", txt:"<b>Carbon buildup on intake valves</b> (direct injection, no port injection). Rough cold idle or hesitation = due for walnut blasting (real money). Ask if it's ever been done; assume not unless proven."},
+      {yr:[2006,2013], tag:"note", txt:"2nd-gen cars are now 12+ years of Gulf heat old — everything rubber and electrical needs scrutiny regardless of the badge."}
+    ],
+    "ES 350": [
+      {yr:[2007,2018], tag:"note", txt:"No chronic engine flaw (port injection). Focus on age items: AC, suspension, oil leaks at valve covers on high-mileage cars."}
+    ]
+  },
+  "Nissan": {
+    "Sunny": [
+      {yr:[2012,2024], tag:"note", txt:"Fleet/taxi favourite — verify it wasn't a taxi or rental (chassis check, wear vs mileage mismatch, pedal/seat wear)."}
+    ],
+    "Altima": [
+      {yr:[2013,2018], tag:"must", txt:"<b>CVT transmission failures are common.</b> Test drive warm: shudder, whine, or rubber-band lag = walk away. Ask for CVT fluid service history."}
+    ],
+    "Patrol": [
+      {yr:[2010,2024], tag:"check", txt:"Check for desert/dune use: underbody sand damage, diff and gearbox condition, snorkel/aftermarket mods."}
+    ]
+  },
+  "Toyota": {
+    "Camry": [
+      {yr:[2007,2011], tag:"check", txt:"<b>2AR/2AZ oil consumption</b> on some engines — check oil level vs last change date, blue smoke on startup."},
+      {yr:[2012,2024], tag:"note", txt:"Huge fleet/taxi population — verify private ownership history."}
+    ],
+    "Corolla": [
+      {yr:[2008,2024], tag:"note", txt:"Very reliable, but ex-rental cars are everywhere — check chassis history and wear-vs-mileage consistency."}
+    ],
+    "Veloz": [
+      {yr:[2021,2025], tag:"note", txt:"Daihatsu-based platform with CVT — test for CVT drone/shudder under full load; check rear AC performance."}
+    ]
+  },
+  "Dodge": {
+    "Charger": [
+      {yr:[2006,2023], tag:"must", txt:"<b>US import risk:</b> most cheap examples are auction/insurance write-offs. Run the VIN through Carfax/AutoCheck BEFORE viewing. Confirm GCC specs if claimed."},
+      {yr:[2006,2023], tag:"check", txt:"Non-GCC cooling/AC struggles in Gulf summers — verify AC performance at idle in the heat."}
+    ]
+  },
+  "Ford": {
+    "Mustang": [
+      {yr:[2011,2023], tag:"must", txt:"<b>Import check:</b> big share of US auction imports — Carfax the VIN before viewing. GCC-spec cars carry a fair premium for a reason."},
+      {yr:[2015,2017], tag:"check", txt:"EcoBoost: check for coolant loss and turbo shaft play; V8: rear diff and clutch wear from enthusiastic owners."}
+    ]
+  },
+  "Hyundai": {
+    "Sonata": [
+      {yr:[2011,2019], tag:"must", txt:"<b>Theta II engine failures</b> (rod bearings) — listen for bottom-end knock cold and warm; check if the engine was ever replaced under campaign."}
+    ],
+    "Elantra": [
+      {yr:[2011,2016], tag:"check", txt:"Listen for engine ticking; check for oil consumption between changes."}
+    ]
+  },
+  "Kia": {
+    "Optima": [
+      {yr:[2011,2019], tag:"must", txt:"<b>Theta II engine failures</b> (same as Sonata) — knock test cold and warm; verify campaign history."}
+    ]
+  },
+  "Honda": {
+    "Accord": [
+      {yr:[2008,2012], tag:"check", txt:"V6 VCM oil consumption; 4-cyl auto — check smooth shifts when warm."},
+      {yr:[2013,2017], tag:"note", txt:"Solid generation; standard checks apply. Verify no ex-rental history."}
+    ],
+    "Civic": [
+      {yr:[2016,2021], tag:"check", txt:"1.5 turbo: check for oil dilution (fuel smell on dipstick) and AC condenser condition."}
+    ]
+  }
+};
+
+const BRANDS = Object.keys(DB).sort();
+
+/* ---------------- generic check builders ---------------- */
+function ageChecks(age){
+  const c=[];
+  if(age>=4) c.push(["check","<b>AC performance</b> — must blow genuinely cold at idle in direct sun. Gulf heat kills compressors and condensers; a recharge 'fix' hides real faults."]);
+  if(age>=6){
+    c.push(["check","<b>All rubber:</b> engine mounts, suspension bushings, door seals, hoses — heat-cracking is age-driven, not mileage-driven."]);
+    c.push(["check","<b>Battery & charging</b> — batteries last 2–3 years here; check date code and alternator output."]);
+  }
+  if(age>=8){
+    c.push(["check","<b>Paint & interior sun damage</b> — clearcoat peel on roof/bonnet, cracked dash, sagging headliner. Bargaining levers, and resale killers."]);
+    c.push(["check","<b>Radiator, water pump, thermostat</b> — pressure-test the cooling system; original parts at this age are on borrowed time."]);
+  }
+  if(age>=12) c.push(["note","<b>12+ years old:</b> assume every wear item not documented as replaced is due. Price the car accordingly."]);
+  return c;
+}
+function kmChecks(km){
+  const c=[];
+  if(km>=80000) c.push(["check","<b>Brake discs & pads</b> — measure remaining pad life; feel for judder under firm braking."]);
+  if(km>=120000){
+    c.push(["must","<b>Automatic transmission behaviour warm</b> — drive 15+ minutes: shifts must be smooth, no jerks, flares, or whines. The single most expensive failure point."]);
+    c.push(["check","<b>Suspension over bumps</b> — knocks/rattles = bushings, links, or shocks due."]);
+  }
+  if(km>=150000){
+    c.push(["must","<b>Oil cap / valve cover look</b> — inspector removes oil cap: golden-brown metal = cared for; black sludge = walk away regardless of paperwork."]);
+    c.push(["check","<b>Cold-start test</b> — arrive before the seller warms it up. Rattles, smoke, or rough idle on true cold start reveal wear a warm engine hides."]);
+    c.push(["check","<b>Oil leaks</b> — valve cover, oil pan, axle seals. Small seepage is normal; drips are negotiation or a walk."]);
+  }
+  if(km>=200000) c.push(["note","<b>200K+ km:</b> buy this as a run-it-into-the-ground car. Assume near-zero resale in 3–4 years; the price must reflect that."]);
+  return c;
+}
+const UNIVERSAL = [
+  ["must","<b>Independent pre-purchase inspection</b> (~AED 300) — non-negotiable, before any money changes hands."],
+  ["must","<b>GCC specs verification</b> — VIN decode, not the listing badge. Non-GCC = insurance loading, resale penalty, possible auction history."],
+  ["must","<b>Accident & history check</b> — RTA / Dubai Police chassis check; ask for the VIN before the viewing. Refusal = answer."],
+  ["must","<b>Finance clearance</b> — if the car has a loan, the bank must be settled before transfer. Never pay the seller directly; use platform/bank escrow."],
+  ["check","<b>Service history verification</b> — call the workshop on the stamps; dealer records live against the VIN and can't be forged. Check mileage climbs sensibly across visits."],
+  ["check","<b>Odometer sanity</b> — ECU scan can expose tampering; cross-check wear (pedals, steering wheel, driver seat) against the claimed km."],
+  ["check","<b>Tyres</b> — DOT date codes (heat ages rubber in ~4 years regardless of tread), matching brands, even wear (uneven = alignment or accident)."],
+  ["note","<b>All keys & manuals</b> — one key = AED 800–1,500 replacement on modern cars. Bargaining lever."]
+];
+
+/* ---------------- ui ---------------- */
+const brandSel=document.getElementById("brand"), modelSel=document.getElementById("model");
+brandSel.innerHTML = BRANDS.map(b=>`<option>${b}</option>`).join("") + `<option>Other</option>`;
+function fillModels(){
+  const b=brandSel.value;
+  const models = DB[b] ? Object.keys(DB[b]) : [];
+  modelSel.innerHTML = models.map(m=>`<option>${m}</option>`).join("") + `<option>Other / not listed</option>`;
+}
+brandSel.addEventListener("change",fillModels);
+fillModels();
+brandSel.value="Mazda"; fillModels(); modelSel.value="6";
+
+document.getElementById("go").addEventListener("click",()=>{
+  const brand=brandSel.value, model=modelSel.value;
+  const year=parseInt(document.getElementById("year").value,10);
+  const km=parseInt(document.getElementById("km").value,10);
+  if(!year||!km){alert("Enter make year and mileage.");return;}
+  const age=new Date().getFullYear()-year;
+
+  // model-specific
+  let specific=[];
+  if(DB[brand] && DB[brand][model]){
+    specific = DB[brand][model].filter(i=>year>=i.yr[0]&&year<=i.yr[1]).map(i=>[i.tag,i.txt]);
+  }
+  const unknown = !(DB[brand]&&DB[brand][model]);
+
+  // risk stamp
+  const mustCount = specific.filter(c=>c[0]==="must").length;
+  let risk="risk-low", riskTxt="Standard diligence";
+  if(km>=180000||age>=12||mustCount>=2){risk="risk-high";riskTxt="High diligence";}
+  else if(km>=120000||age>=8||mustCount>=1){risk="risk-med";riskTxt="Elevated diligence";}
+
+  // render
+  document.getElementById("jcCar").textContent=`${brand} ${model==="Other / not listed"?"":model}`.trim();
+  document.getElementById("jcMeta").textContent=`${year} · ${km.toLocaleString()} km · ~${age} yrs · ~${Math.round(km/Math.max(age,1)/1000)}K km/yr`;
+  const stamp=document.getElementById("jcStamp");
+  stamp.textContent=riskTxt; stamp.className="stamp "+risk;
+
+  const sec=(title,items)=> items.length?`
+    <div class="section"><div class="sec-title">${title}</div>
+      ${items.map(([t,txt])=>`<div class="check" onclick="this.classList.toggle('done')"><span class="box"></span><span class="ct"><span class="tag ${t}">${t}</span>${txt}</span></div>`).join("")}
+    </div>`:"";
+
+  let html="";
+  if(specific.length) html+=sec(`Known issues — ${brand} ${model} (${year})`,specific);
+  if(unknown) html+=sec("Model notes",[["note",`No model-specific database entry for this car. The age, mileage, and UAE checks below still apply — and research "<b>${brand} ${model} ${year} common problems</b>" before viewing.`]]);
+  html+=sec(`Mileage-based — ${km.toLocaleString()} km`,kmChecks(km));
+  html+=sec(`Age-based — ${age} years in Gulf heat`,ageChecks(age));
+  html+=sec("Always — UAE market",UNIVERSAL);
+  document.getElementById("jcSections").innerHTML=html;
+
+  const kmPerYr=km/Math.max(age,1);
+  let verdict=`<b>Read:</b> `;
+  if(kmPerYr>28000) verdict+=`~${Math.round(kmPerYr/1000)}K km/year suggests fleet, company, or heavy-commuter use — likely highway kilometres (gentler), but verify ownership history carefully. `;
+  else if(kmPerYr<10000) verdict+=`Unusually low km/year — verify the odometer via ECU scan and service-record progression; low mileage claims are where tampering lives. `;
+  else verdict+=`Mileage-per-year looks like normal private use. `;
+  if(risk==="risk-high") verdict+=`This car needs the full inspection treatment — every <b>MUST</b> item is a walk-away trigger if it fails.`;
+  else if(risk==="risk-med") verdict+=`Solid candidate if the <b>MUST</b> items clear. Use any <b>CHECK</b> findings as negotiation levers.`;
+  else verdict+=`Younger/lower-mileage car — the main risks are history and paperwork, not mechanical wear. Don't skip the inspection anyway.`;
+  document.getElementById("jcVerdict").innerHTML=verdict;
+
+  document.getElementById("result").style.display="block";
+  document.getElementById("result").scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?"auto":"smooth"});
+});
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  document.getElementById("result").style.display="none";
+  window.scrollTo({top:0});
+});
+</script>
+</body>
+</html>
