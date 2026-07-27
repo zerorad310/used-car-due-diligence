@@ -3,413 +3,744 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pre-Purchase Job Card — UAE Used Car Checks</title>
+<title>Inspection Garage — UAE Used Car Due Diligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f6f4ef;
-    --ink:#1b2430;
-    --ink-soft:#4b5563;
-    --line:#d8d2c4;
-    --safety:#e8590c;
-    --pass:#2b7a3d;
-    --warn:#b3820f;
-    --card:#fffdf8;
+    --paper:#f6f4ef; --ink:#1b2430; --ink-soft:#4b5563; --line:#d8d2c4;
+    --safety:#e8590c; --pass:#2b7a3d; --warn:#b3820f; --card:#fffdf8; --ai:#4c5fd5;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Archivo',system-ui,sans-serif;
-    font-variation-settings:'wdth' 92;
-    line-height:1.55;
-    min-height:100vh;
-  }
-  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px}
+  body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;
+    font-variation-settings:'wdth' 92;line-height:1.55;min-height:100vh}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 90px}
 
-  /* ---------- header ---------- */
-  header{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:28px}
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--safety);font-weight:600;margin-bottom:6px;
-  }
-  h1{
-    font-size:clamp(28px,5vw,44px);font-weight:850;line-height:1.05;
-    font-variation-settings:'wdth' 80;letter-spacing:-.01em;
-  }
-  .sub{color:var(--ink-soft);margin-top:10px;max-width:60ch;font-size:15px}
+  header{border-bottom:3px solid var(--ink);padding-bottom:14px;margin-bottom:20px;
+    display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--safety);font-weight:600;margin-bottom:4px}
+  h1{font-size:clamp(24px,5vw,38px);font-weight:850;line-height:1.05;
+    font-variation-settings:'wdth' 80;letter-spacing:-.01em}
+  nav{display:flex;gap:8px}
+  nav button{padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--ink);
+    border:1.5px solid var(--ink);border-radius:3px;cursor:pointer}
+  nav button.active,nav button:hover{background:var(--ink);color:var(--paper)}
 
-  /* ---------- form ---------- */
-  .intake{
-    background:var(--card);border:1.5px solid var(--ink);border-radius:4px;
-    padding:22px;margin-bottom:34px;
-    box-shadow:4px 4px 0 rgba(27,36,48,.12);
-  }
-  .intake-title{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
-    letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;
-    display:flex;align-items:center;gap:10px;
-  }
-  .intake-title::after{content:"";flex:1;border-top:1px dashed var(--line)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-  label{
-    display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;
-    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px;
-  }
-  select,input{
-    width:100%;padding:10px 12px;font-family:'Archivo',sans-serif;font-size:15px;
-    border:1.5px solid var(--ink);border-radius:3px;background:#fff;color:var(--ink);
-  }
-  select:focus,input:focus{outline:3px solid rgba(232,89,12,.35);outline-offset:1px}
-  button{
-    margin-top:18px;width:100%;padding:14px;cursor:pointer;
-    font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;letter-spacing:.02em;
-    background:var(--ink);color:var(--paper);border:none;border-radius:3px;
-    transition:transform .08s ease, background .15s ease;
-  }
-  button:hover{background:var(--safety)}
-  button:active{transform:translateY(1px)}
-  button:focus-visible{outline:3px solid var(--safety);outline-offset:2px}
+  .panel{background:var(--card);border:1.5px solid var(--ink);border-radius:4px;
+    padding:18px;margin-bottom:20px;box-shadow:4px 4px 0 rgba(27,36,48,.12)}
+  .panel-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;
+    display:flex;align-items:center;gap:10px}
+  .panel-title::after{content:"";flex:1;border-top:1px dashed var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+  select,input,textarea{width:100%;padding:9px 11px;font-family:'Archivo',sans-serif;font-size:15px;
+    border:1.5px solid var(--ink);border-radius:3px;background:#fff;color:var(--ink)}
+  select:focus,input:focus,textarea:focus{outline:3px solid rgba(232,89,12,.35);outline-offset:1px}
+  .btn{padding:11px 16px;cursor:pointer;font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:14px;background:var(--ink);color:var(--paper);border:none;border-radius:3px}
+  .btn:hover{background:var(--safety)}
+  .btn:focus-visible{outline:3px solid var(--safety);outline-offset:2px}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn.ai{background:var(--ai)}
+  .btn.ai:hover{background:#3546b8}
+  .btn.small{padding:7px 12px;font-size:12.5px}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
-  /* ---------- job card output ---------- */
-  #result{display:none}
-  .jobcard{
-    background:var(--card);border:1.5px solid var(--ink);border-radius:4px;
-    box-shadow:4px 4px 0 rgba(27,36,48,.12);overflow:hidden;
-  }
-  .jc-head{
-    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
-    padding:20px 22px;border-bottom:2px solid var(--ink);flex-wrap:wrap;
-  }
-  .jc-car{font-size:22px;font-weight:850;font-variation-settings:'wdth' 82}
-  .jc-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-top:4px}
-  .stamp{
-    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.1em;
-    text-transform:uppercase;padding:8px 14px;border:2px solid;border-radius:3px;
-    transform:rotate(-2deg);white-space:nowrap;align-self:center;
-  }
-  .stamp.risk-low{color:var(--pass);border-color:var(--pass)}
-  .stamp.risk-med{color:var(--warn);border-color:var(--warn)}
-  .stamp.risk-high{color:var(--safety);border-color:var(--safety)}
+  /* garage cards */
+  .carcard{border:1.5px solid var(--ink);border-radius:4px;background:#fff;padding:14px 16px;
+    margin-bottom:12px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+  .cc-name{font-weight:800;font-size:17px;font-variation-settings:'wdth' 84}
+  .cc-meta{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .stamp{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;padding:5px 10px;border:2px solid;border-radius:3px;transform:rotate(-2deg);white-space:nowrap}
+  .risk-low{color:var(--pass);border-color:var(--pass)}
+  .risk-med{color:var(--warn);border-color:var(--warn)}
+  .risk-high{color:var(--safety);border-color:var(--safety)}
 
-  .section{padding:18px 22px;border-bottom:1px solid var(--line)}
-  .section:last-of-type{border-bottom:none}
-  .sec-title{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
-    letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;
-    display:flex;align-items:center;gap:10px;
-  }
-  .sec-title::after{content:"";flex:1;border-top:1px dashed var(--line)}
-  .check{
-    display:grid;grid-template-columns:auto 1fr;gap:10px 12px;
-    padding:9px 0;border-bottom:1px dotted var(--line);align-items:start;
-  }
+  /* detail tabs */
+  .tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+  .tabs button{padding:8px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+    letter-spacing:.05em;text-transform:uppercase;background:transparent;border:1.5px solid var(--line);
+    border-radius:3px;cursor:pointer;color:var(--ink-soft)}
+  .tabs button.active{border-color:var(--ink);color:var(--ink);background:#fff}
+
+  /* checks */
+  .section{padding:14px 0;border-bottom:1px solid var(--line)}
+  .section:last-child{border-bottom:none}
+  .sec-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .sec-title{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase}
+  .check{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;padding:8px 0;
+    border-bottom:1px dotted var(--line);align-items:start}
   .check:last-child{border-bottom:none}
-  .box{
-    width:17px;height:17px;border:1.8px solid var(--ink);border-radius:2px;
-    margin-top:3px;flex-shrink:0;cursor:pointer;position:relative;
-  }
-  .check.done .box::after{
-    content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--safety);
-  }
+  .box{width:16px;height:16px;border:1.8px solid var(--ink);border-radius:2px;margin-top:3px;
+    cursor:pointer;position:relative;flex-shrink:0}
+  .check.done .box::after{content:"✕";position:absolute;inset:0;display:flex;align-items:center;
+    justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;color:var(--safety)}
   .check.done .ct{text-decoration:line-through;color:var(--ink-soft)}
-  .ct{font-size:14.5px}
+  .ct{font-size:14px}
   .ct b{font-weight:700}
-  .tag{
-    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;
-    font-weight:600;letter-spacing:.08em;padding:1px 6px;border-radius:2px;
-    margin-right:6px;vertical-align:1px;text-transform:uppercase;
-  }
+  .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;
+    letter-spacing:.07em;padding:1px 5px;border-radius:2px;margin-right:5px;vertical-align:1px;text-transform:uppercase}
   .tag.must{background:var(--safety);color:#fff}
   .tag.check{background:var(--warn);color:#fff}
   .tag.note{background:var(--ink-soft);color:#fff}
+  .guide-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:0 4px;vertical-align:-1px}
+  .guide{display:none;grid-column:2;background:var(--paper);border:1px dashed var(--ink-soft);
+    border-radius:3px;padding:10px 12px;margin-top:6px;font-size:13px}
+  .guide.open{display:block}
+  .guide ol{padding-left:18px;margin:6px 0}
+  .guide li{margin-bottom:5px}
+  .guide a{color:var(--safety);font-weight:600}
+  .guide .g-warn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:6px}
 
-  .verdict{
-    padding:18px 22px;background:var(--ink);color:var(--paper);
-    font-size:14.5px;line-height:1.6;
-  }
-  .verdict b{color:#ffb38a}
+  /* photo + ai blocks */
+  .photobar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .thumbs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .thumbs img{width:64px;height:64px;object-fit:cover;border:1.5px solid var(--ink);border-radius:3px}
+  .airesult{background:#eef0fb;border:1.5px solid var(--ai);border-radius:3px;padding:12px 14px;
+    margin-top:10px;font-size:13.5px;white-space:pre-wrap}
+  .airesult .ai-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ai);margin-bottom:6px;white-space:normal}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--paper);
+    border-top-color:transparent;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
 
-  .actions{display:flex;gap:10px;margin-top:16px}
-  .actions button{margin-top:0;width:auto;padding:11px 18px;font-size:14px}
-  .actions .ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-  .actions .ghost:hover{background:var(--ink);color:var(--paper)}
+  /* pros cons */
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.pc{grid-template-columns:1fr}}
+  .pc h3{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:8px}
+  .pc ul{list-style:none}
+  .pc li{padding:6px 0 6px 20px;position:relative;font-size:14px;border-bottom:1px dotted var(--line)}
+  .pc .good li::before{content:"＋";position:absolute;left:0;color:var(--pass);font-weight:700}
+  .pc .bad li::before{content:"－";position:absolute;left:0;color:var(--safety);font-weight:700}
 
-  footer{
-    margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
-    color:var(--ink-soft);line-height:1.7;border-top:1px solid var(--line);padding-top:14px;
-  }
+  /* price */
+  .verdictbox{padding:14px 16px;background:var(--ink);color:var(--paper);border-radius:3px;
+    font-size:14px;line-height:1.6;margin-top:12px}
+  .verdictbox b{color:#ffb38a}
 
-  @media print{
-    body{background:#fff}
-    .intake,.actions,footer,header .sub{display:none}
-    .jobcard{box-shadow:none;border-width:1px}
-    .wrap{padding:0}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none !important}
-  }
+  /* compare */
+  .wl{display:grid;grid-template-columns:110px 1fr 26px;gap:8px;align-items:center;margin-bottom:6px}
+  .wl label{margin:0}
+  input[type=range]{accent-color:var(--safety);padding:0;border:none}
+  .rank{border:1.5px solid var(--ink);border-radius:4px;background:#fff;padding:14px;margin-bottom:10px}
+  .rank .r-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .r-pos{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;color:var(--safety)}
+  .bar{height:8px;background:var(--paper);border:1px solid var(--line);border-radius:2px;margin:3px 0 8px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--ink)}
+  .r-axis{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.05em}
+  .winner{border-width:2.5px;box-shadow:4px 4px 0 rgba(43,122,61,.25)}
+
+  .keychip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:4px 9px;border-radius:20px;
+    border:1.5px solid;letter-spacing:.05em}
+  .key-on{color:var(--pass);border-color:var(--pass)}
+  .key-off{color:var(--ink-soft);border-color:var(--line)}
+
+  footer{margin-top:36px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);
+    line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
+  .hidden{display:none !important}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">UAE Used Car · Pre-Purchase</div>
-    <h1>Inspection Job Card</h1>
-    <p class="sub">Enter the car. Get the checks that matter for its age, mileage, and known model issues — tuned for Gulf heat and the Dubai used market. Print it, take it to the viewing, tick as you go.</p>
+    <div>
+      <div class="eyebrow">UAE Used Car · Due Diligence</div>
+      <h1>Inspection Garage</h1>
+    </div>
+    <nav>
+      <button id="navGarage" class="active" onclick="showView('garage')">Garage</button>
+      <button id="navCompare" onclick="showView('compare')">Compare</button>
+      <button id="navAI" onclick="showView('ai')">AI Key</button>
+    </nav>
   </header>
 
-  <div class="intake">
-    <div class="intake-title">Vehicle intake</div>
-    <div class="grid">
-      <div>
-        <label for="brand">Brand</label>
-        <select id="brand"></select>
+  <!-- ============ GARAGE VIEW ============ -->
+  <div id="view-garage">
+    <div class="panel">
+      <div class="panel-title">Add a candidate</div>
+      <div class="grid">
+        <div><label for="fBrand">Brand</label><select id="fBrand"></select></div>
+        <div><label for="fModel">Model</label><select id="fModel"></select></div>
+        <div><label for="fYear">Year</label><input id="fYear" type="number" min="1995" max="2026" placeholder="2017"></div>
+        <div><label for="fKm">Mileage (km)</label><input id="fKm" type="number" step="1000" placeholder="145000"></div>
+        <div><label for="fPrice">Asking price (AED)</label><input id="fPrice" type="number" step="500" placeholder="30000"></div>
       </div>
-      <div>
-        <label for="model">Model</label>
-        <select id="model"></select>
-      </div>
-      <div>
-        <label for="year">Make year</label>
-        <input id="year" type="number" min="1995" max="2026" placeholder="2017">
-      </div>
-      <div>
-        <label for="km">Mileage (km)</label>
-        <input id="km" type="number" min="0" step="1000" placeholder="145000">
-      </div>
+      <div style="margin-top:12px"><button class="btn" onclick="addCar()">Add to garage</button></div>
     </div>
-    <button id="go">Generate job card</button>
+    <div id="carList"></div>
   </div>
 
-  <div id="result">
-    <div class="jobcard">
-      <div class="jc-head">
-        <div>
-          <div class="jc-car" id="jcCar"></div>
-          <div class="jc-meta" id="jcMeta"></div>
-        </div>
-        <div class="stamp" id="jcStamp"></div>
-      </div>
-      <div id="jcSections"></div>
-      <div class="verdict" id="jcVerdict"></div>
+  <!-- ============ CAR DETAIL VIEW ============ -->
+  <div id="view-car" class="hidden">
+    <div class="row" style="margin-bottom:12px;justify-content:space-between">
+      <button class="btn ghost small" onclick="showView('garage')">← Garage</button>
+      <button class="btn ghost small" onclick="deleteCar(state.currentCar)">Delete car</button>
     </div>
-    <div class="actions">
-      <button id="printBtn">Print job card</button>
-      <button class="ghost" id="resetBtn">New car</button>
+    <div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <div class="cc-name" id="dName"></div>
+          <div class="cc-meta" id="dMeta"></div>
+        </div>
+        <div class="stamp" id="dStamp"></div>
+      </div>
+      <div class="tabs" style="margin-top:14px">
+        <button class="active" data-tab="checks" onclick="showTab('checks')">Job Card</button>
+        <button data-tab="proscons" onclick="showTab('proscons')">Pros / Cons</button>
+        <button data-tab="price" onclick="showTab('price')">Price Check</button>
+        <button data-tab="verdict" onclick="showTab('verdict')">AI Verdict</button>
+      </div>
+      <div id="tab-checks"></div>
+      <div id="tab-proscons" class="hidden"></div>
+      <div id="tab-price" class="hidden"></div>
+      <div id="tab-verdict" class="hidden"></div>
+    </div>
+  </div>
+
+  <!-- ============ COMPARE VIEW ============ -->
+  <div id="view-compare" class="hidden">
+    <div class="panel">
+      <div class="panel-title">Your priorities (0 = ignore · 5 = critical)</div>
+      <div id="weights"></div>
+      <div style="margin-top:12px"><button class="btn" onclick="runCompare()">Rank my garage</button></div>
+    </div>
+    <div id="compareOut"></div>
+  </div>
+
+  <!-- ============ AI KEY VIEW ============ -->
+  <div id="view-ai" class="hidden">
+    <div class="panel">
+      <div class="panel-title">Claude API key</div>
+      <p style="font-size:14px;margin-bottom:10px">Paste your Anthropic API key to unlock photo analysis and AI verdicts.
+      The key is held in <b>sessionStorage only</b> — it lives in this tab, is never saved to disk or the repo, and vanishes when you close the tab. Calls go directly from your browser to api.anthropic.com over HTTPS.</p>
+      <div class="row">
+        <input id="apiKey" type="password" placeholder="sk-ant-..." style="flex:1;min-width:220px">
+        <button class="btn" onclick="saveKey()">Save for this session</button>
+        <button class="btn ghost" onclick="clearKey()">Clear</button>
+      </div>
+      <div style="margin-top:10px"><span id="keyChip" class="keychip key-off">No key — AI features locked</span></div>
     </div>
   </div>
 
   <footer>
-    Rule of thumb: paper history is a bonus, the AED&nbsp;300 independent inspection is the requirement. Never pay before it. A seller who resists inspection has answered your question.<br>
-    General guidance only — always verify recalls by VIN with the official dealer.
+    Paper history is a bonus; the AED&nbsp;300 independent inspection is the requirement. Never pay before it.<br>
+    Known-issue data and links reflect the builder's knowledge cutoff — verify recalls by VIN with the official dealer, and confirm portal links are current. AI photo reads are advisory, not an inspection.
   </footer>
 </div>
 
 <script>
-/* ---------------- data ---------------- */
+/* ================= DATA ================= */
 const DB = {
-  "Mazda": {
-    "6": [
-      {yr:[2013,2013], tag:"note", txt:"<b>First year of the 3rd generation.</b> Early-build teething issues and now the oldest, most heat-aged examples. Prefer 2016+."},
-      {yr:[2014,2015], tag:"check", txt:"<b>Infotainment freezes / ghost touch</b> — test the screen thoroughly, including while driving over bumps."},
-      {yr:[2014,2015], tag:"check", txt:"<b>Early brake disc warping</b> — brake firmly from 100 km/h on the test drive; steering-wheel shudder means discs."},
-      {yr:[2013,2017], tag:"note", txt:"<b>Thin paint</b> on this generation — inspect bonnet and bumper edges for chips and cheap resprays."},
-      {yr:[2018,2021], tag:"must", txt:"<b>Cylinder-deactivation rocker arm campaign</b> — confirm any service campaign was done (VIN check at dealer). Listen for misfires / rough idle when warm."},
-      {yr:[2018,2019], tag:"must", txt:"<b>Denso fuel pump recall</b> — verify completion by VIN with Galadari (free)."}
-    ],
-    "3": [
-      {yr:[2004,2019], tag:"must", txt:"<b>Engine trim check:</b> GCC base trims used the old 1.6L MZR + 4-speed auto — underpowered and thirstier. Only buy the <b>2.0L Skyactiv-G with 6-speed auto</b>. Verify on engine cover and VIN, not the listing."},
-      {yr:[2014,2016], tag:"check", txt:"<b>Infotainment freezes</b> — same unit as the 6; test thoroughly."}
-    ],
-    "CX-5": [
-      {yr:[2012,2016], tag:"check", txt:"<b>Daytime running light / headlight failures</b> on early cars — check all lighting."},
-      {yr:[2012,2015], tag:"note", txt:"Early cars now heat-aged; budget for suspension bushings and AC service."}
-    ]
-  },
-  "Lexus": {
-    "IS 250": [
-      {yr:[2006,2015], tag:"must", txt:"<b>Carbon buildup on intake valves</b> (direct injection, no port injection). Rough cold idle or hesitation = due for walnut blasting (real money). Ask if it's ever been done; assume not unless proven."},
-      {yr:[2006,2013], tag:"note", txt:"2nd-gen cars are now 12+ years of Gulf heat old — everything rubber and electrical needs scrutiny regardless of the badge."}
-    ],
-    "ES 350": [
-      {yr:[2007,2018], tag:"note", txt:"No chronic engine flaw (port injection). Focus on age items: AC, suspension, oil leaks at valve covers on high-mileage cars."}
-    ]
-  },
-  "Nissan": {
-    "Sunny": [
-      {yr:[2012,2024], tag:"note", txt:"Fleet/taxi favourite — verify it wasn't a taxi or rental (chassis check, wear vs mileage mismatch, pedal/seat wear)."}
-    ],
-    "Altima": [
-      {yr:[2013,2018], tag:"must", txt:"<b>CVT transmission failures are common.</b> Test drive warm: shudder, whine, or rubber-band lag = walk away. Ask for CVT fluid service history."}
-    ],
-    "Patrol": [
-      {yr:[2010,2024], tag:"check", txt:"Check for desert/dune use: underbody sand damage, diff and gearbox condition, snorkel/aftermarket mods."}
-    ]
-  },
-  "Toyota": {
-    "Camry": [
-      {yr:[2007,2011], tag:"check", txt:"<b>2AR/2AZ oil consumption</b> on some engines — check oil level vs last change date, blue smoke on startup."},
-      {yr:[2012,2024], tag:"note", txt:"Huge fleet/taxi population — verify private ownership history."}
-    ],
-    "Corolla": [
-      {yr:[2008,2024], tag:"note", txt:"Very reliable, but ex-rental cars are everywhere — check chassis history and wear-vs-mileage consistency."}
-    ],
-    "Veloz": [
-      {yr:[2021,2025], tag:"note", txt:"Daihatsu-based platform with CVT — test for CVT drone/shudder under full load; check rear AC performance."}
-    ]
-  },
-  "Dodge": {
-    "Charger": [
-      {yr:[2006,2023], tag:"must", txt:"<b>US import risk:</b> most cheap examples are auction/insurance write-offs. Run the VIN through Carfax/AutoCheck BEFORE viewing. Confirm GCC specs if claimed."},
-      {yr:[2006,2023], tag:"check", txt:"Non-GCC cooling/AC struggles in Gulf summers — verify AC performance at idle in the heat."}
-    ]
-  },
-  "Ford": {
-    "Mustang": [
-      {yr:[2011,2023], tag:"must", txt:"<b>Import check:</b> big share of US auction imports — Carfax the VIN before viewing. GCC-spec cars carry a fair premium for a reason."},
-      {yr:[2015,2017], tag:"check", txt:"EcoBoost: check for coolant loss and turbo shaft play; V8: rear diff and clutch wear from enthusiastic owners."}
-    ]
-  },
-  "Hyundai": {
-    "Sonata": [
-      {yr:[2011,2019], tag:"must", txt:"<b>Theta II engine failures</b> (rod bearings) — listen for bottom-end knock cold and warm; check if the engine was ever replaced under campaign."}
-    ],
-    "Elantra": [
-      {yr:[2011,2016], tag:"check", txt:"Listen for engine ticking; check for oil consumption between changes."}
-    ]
-  },
-  "Kia": {
-    "Optima": [
-      {yr:[2011,2019], tag:"must", txt:"<b>Theta II engine failures</b> (same as Sonata) — knock test cold and warm; verify campaign history."}
-    ]
-  },
-  "Honda": {
-    "Accord": [
-      {yr:[2008,2012], tag:"check", txt:"V6 VCM oil consumption; 4-cyl auto — check smooth shifts when warm."},
-      {yr:[2013,2017], tag:"note", txt:"Solid generation; standard checks apply. Verify no ex-rental history."}
-    ],
-    "Civic": [
-      {yr:[2016,2021], tag:"check", txt:"1.5 turbo: check for oil dilution (fuel smell on dipstick) and AC condenser condition."}
-    ]
-  }
+ "Mazda":{
+  "6":{issues:[
+    {yr:[2013,2013],tag:"note",txt:"<b>First year of the 3rd generation.</b> Early-build teething and now the oldest heat-aged examples. Prefer 2016+."},
+    {yr:[2014,2015],tag:"check",txt:"<b>Infotainment freezes / ghost touch</b> — test the screen thoroughly, including over bumps."},
+    {yr:[2014,2015],tag:"check",txt:"<b>Early brake disc warping</b> — brake firmly from 100 km/h; wheel shudder = discs."},
+    {yr:[2013,2017],tag:"note",txt:"<b>Thin paint</b> — inspect bonnet/bumper edges for chips and cheap resprays."},
+    {yr:[2018,2021],tag:"must",txt:"<b>Cylinder-deactivation rocker arm campaign</b> — confirm by VIN at dealer. Listen for misfires / rough warm idle.",guide:"recall"},
+    {yr:[2018,2019],tag:"must",txt:"<b>Denso fuel pump recall</b> — verify completion by VIN with Galadari (free).",guide:"recall"}],
+   pros:["Best-in-class steering and chassis — the driver's choice of the segment","Skyactiv 2.5L: strong (~190 hp) and near-bulletproof with oil changes","Premium-feeling cabin, especially 2016+ facelift","Cheap parts, simple conventional 6-speed auto — no CVT, no turbo"],
+   cons:["Rear seat tighter than Camry/Accord (fine for 3, snug for 5)","Firm-ish ride on 19\" wheels — prefer 17\"","Thin paint chips easily; resale softer than Toyota"],
+   r:{run:4,fam:4,drive:5,rel:4}},
+  "3":{issues:[
+    {yr:[2004,2019],tag:"must",txt:"<b>Engine trim check:</b> GCC base trims used the old 1.6L + 4-speed auto — underpowered, thirstier. Only buy the <b>2.0L Skyactiv + 6-speed</b>. Verify on engine cover and VIN, not the listing.",guide:"vin"},
+    {yr:[2014,2016],tag:"check",txt:"<b>Infotainment freezes</b> — same unit as the 6; test thoroughly."}],
+   pros:["Most fun-to-drive compact at the money (2.0L Skyactiv)","Excellent fuel economy with the 6-speed","Cheap to insure, run, and park"],
+   cons:["Compact rear seat and boot — fine for a small family, tight beyond","Base 1.6L versions flood the market and drag the badge down","Road noise higher than class average"],
+   r:{run:5,fam:3,drive:5,rel:4}},
+  "CX-5":{issues:[
+    {yr:[2012,2016],tag:"check",txt:"<b>DRL / headlight failures</b> on early cars — check all lighting."},
+    {yr:[2012,2015],tag:"note",txt:"Early cars now heat-aged; budget for bushings and AC service."}],
+   pros:["SUV practicality with genuine car-like handling","Same reliable Skyactiv engines as the 6"],
+   cons:["Pricier than the 6 for equivalent year/mileage","Boot smaller than rivals like CR-V"],
+   r:{run:4,fam:4,drive:4,rel:4}}},
+ "Lexus":{
+  "IS 250":{issues:[
+    {yr:[2006,2015],tag:"must",txt:"<b>Carbon buildup on intake valves</b> (DI without port injection). Rough cold idle/hesitation = walnut blasting due (real money). Assume not done unless proven."},
+    {yr:[2006,2013],tag:"note",txt:"12+ years of Gulf heat — every rubber and electrical item needs scrutiny, badge or not."}],
+   pros:["Toyota reliability in a premium suit","Cabin quality embarrasses anything at the price","Strong UAE following — parts and specialists everywhere"],
+   cons:["Tightest rear seat in this whole comparison","Carbon buildup maintenance is real money","Lexus-tax on parts and servicing; older car for the same budget"],
+   r:{run:2,fam:2,drive:4,rel:4}},
+  "ES 350":{issues:[
+    {yr:[2007,2018],tag:"note",txt:"No chronic engine flaw (port injection). Focus on age items: AC, suspension, valve-cover oil seepage at high km."}],
+   pros:["Legendary comfort and refinement","3.5 V6 is one of the most durable engines ever sold here","Full-size family space"],
+   cons:["Thirsty for daily 30K km/yr use","Soft, uninvolving to drive","Same budget buys an older car than a Mazda 6"],
+   r:{run:3,fam:5,drive:3,rel:5}}},
+ "Nissan":{
+  "Sunny":{issues:[
+    {yr:[2012,2024],tag:"note",txt:"Fleet/taxi favourite — verify not ex-taxi/rental: chassis check, wear-vs-mileage mismatch.",guide:"history"}],
+   pros:["Rock-bottom running costs","Huge rear legroom for the size"],
+   cons:["~99 hp — strained on highways, especially loaded","Numb, joyless to drive","Massive ex-fleet population"],
+   r:{run:5,fam:3,drive:1,rel:4}},
+  "Altima":{issues:[
+    {yr:[2013,2018],tag:"must",txt:"<b>CVT failures are common.</b> Test warm: shudder, whine, rubber-band lag = walk away. Demand CVT fluid history."}],
+   pros:["Spacious, comfortable, well equipped","Strong 2.5/3.5 engines"],
+   cons:["The CVT is the deal-breaker risk — expensive to replace","Resale suffers because everyone knows about the CVT"],
+   r:{run:4,fam:4,drive:3,rel:2}},
+  "Patrol":{issues:[
+    {yr:[2010,2024],tag:"check",txt:"Check for dune use: underbody sand damage, diff/gearbox condition, aftermarket mods."}],
+   pros:["UAE icon; immense space and capability","Holds value exceptionally well"],
+   cons:["Heavy fuel bills","Many hard-used desert examples"],
+   r:{run:1,fam:5,drive:3,rel:4}}},
+ "Toyota":{
+  "Camry":{issues:[
+    {yr:[2007,2011],tag:"check",txt:"<b>Oil consumption</b> on some engines — check level vs last change, blue smoke on cold start."},
+    {yr:[2012,2024],tag:"note",txt:"Huge fleet/taxi population — verify private ownership.",guide:"history"}],
+   pros:["Benchmark reliability and resale","Roomy rear seat, soft ride","Every mechanic in the UAE knows it"],
+   cons:["Anonymous to drive","Private examples price at a premium; fleet cars everywhere"],
+   r:{run:4,fam:5,drive:3,rel:5}},
+  "Corolla":{issues:[
+    {yr:[2008,2024],tag:"note",txt:"Very reliable, but ex-rentals are everywhere — verify history and wear-vs-mileage.",guide:"history"}],
+   pros:["Cheapest total ownership of anything here","Unkillable"],
+   cons:["Dull drive","Rental history minefield"],
+   r:{run:5,fam:3,drive:2,rel:5}},
+  "Veloz":{issues:[
+    {yr:[2021,2025],tag:"note",txt:"Daihatsu-based, CVT — test for drone/shudder loaded; check rear AC."}],
+   pros:["7 seats in a cheap-to-run package","New enough to dodge age issues"],
+   cons:["105 hp + CVT = strained and droney","Tall body leans; remote steering"],
+   r:{run:5,fam:4,drive:1,rel:4}}},
+ "Dodge":{
+  "Charger":{issues:[
+    {yr:[2006,2023],tag:"must",txt:"<b>US import risk:</b> cheap examples are usually auction/insurance write-offs. Carfax the VIN BEFORE viewing. Confirm GCC if claimed.",guide:"vin"},
+    {yr:[2006,2023],tag:"check",txt:"Non-GCC cooling/AC struggles in Gulf summers — verify AC at idle in heat."}],
+   pros:["Presence and straight-line muscle per dirham","Roomy for a muscle sedan"],
+   cons:["Import/auction history minefield","Thirsty; heavy insurance for new drivers","RWD + power punishes inexperience"],
+   r:{run:1,fam:3,drive:4,rel:2}}},
+ "Ford":{
+  "Mustang":{issues:[
+    {yr:[2011,2023],tag:"must",txt:"<b>Import check:</b> large share of US auction cars — Carfax the VIN before viewing.",guide:"vin"},
+    {yr:[2015,2017],tag:"check",txt:"EcoBoost: coolant loss, turbo shaft play. V8: diff and clutch wear from hard owners."}],
+   pros:["The dream, honestly","GCC cars depreciate kindly — good year-3 reward buy"],
+   cons:["2 usable seats","Thirsty, brutal new-driver insurance","Import minefield at tempting prices"],
+   r:{run:1,fam:1,drive:5,rel:3}}},
+ "Hyundai":{
+  "Sonata":{issues:[
+    {yr:[2011,2019],tag:"must",txt:"<b>Theta II engine failures</b> (rod bearings) — knock test cold and warm; check engine-replacement campaign history.",guide:"recall"}],
+   pros:["Lots of kit for the money","Spacious"],
+   cons:["Theta II engine russian-roulette","Soft resale"],
+   r:{run:4,fam:4,drive:3,rel:2}},
+  "Elantra":{issues:[
+    {yr:[2011,2016],tag:"check",txt:"Listen for engine ticking; check oil consumption between changes."}],
+   pros:["Cheap to buy and run","Well equipped"],
+   cons:["Engine ticking/wear reports on this era","Lightweight feel at speed"],
+   r:{run:5,fam:3,drive:2,rel:3}}},
+ "Kia":{
+  "Optima":{issues:[
+    {yr:[2011,2019],tag:"must",txt:"<b>Theta II engine failures</b> (same as Sonata) — knock test; verify campaign history.",guide:"recall"}],
+   pros:["Sharp looks, strong equipment"],
+   cons:["Theta II risk","Soft resale"],
+   r:{run:4,fam:4,drive:3,rel:2}}},
+ "Honda":{
+  "Accord":{issues:[
+    {yr:[2008,2012],tag:"check",txt:"V6 VCM oil consumption; check smooth warm shifts on autos."},
+    {yr:[2013,2017],tag:"note",txt:"Solid generation; standard checks. Verify no rental history.",guide:"history"}],
+   pros:["Reliability rivaling Toyota with a better drive","Huge cabin"],
+   cons:["Priced at a premium used","CVT on some later cars — check history"],
+   r:{run:4,fam:4,drive:4,rel:5}},
+  "Civic":{issues:[
+    {yr:[2016,2021],tag:"check",txt:"1.5T: oil dilution (fuel smell on dipstick), AC condenser condition."}],
+   pros:["Efficient, well built, good to drive"],
+   cons:["Turbo-era checks needed","Boy-racer abuse common"],
+   r:{run:5,fam:3,drive:4,rel:4}}}
 };
 
-const BRANDS = Object.keys(DB).sort();
+const GUIDES = {
+ inspect:{title:"Booking the independent inspection",steps:[
+  "Book a mobile pre-purchase inspection: providers like AAA Service Center, Carzaty/Kavak, ProFix or any independent garage you trust (~AED 250–400).",
+  "Insist it happens BEFORE any deposit. Meet at the seller's location or a neutral garage.",
+  "Ask specifically for: oil-cap/valve-cover look, cold start, compression if flagged, full OBD scan with stored codes, AC vent temperature reading, suspension shake-down, paint depth gauge.",
+  "Get the report in writing. Every red item is a negotiation lever or a walk-away."],
+  links:[["Dubizzle inspection services","https://dubai.dubizzle.com"],["Search: 'pre purchase car inspection Dubai'","https://www.google.com/search?q=pre+purchase+car+inspection+dubai"]],
+  warn:"Provider names/prices from knowledge cutoff — confirm current offerings."},
+ vin:{title:"VIN / GCC / import verification",steps:[
+  "Ask the seller for the full 17-character VIN (chassis number) BEFORE viewing. Refusal = walk away.",
+  "Decode it free at a VIN decoder site — check build market (GCC vs US/Canada), engine code, and that trim matches the ad.",
+  "For any American car or suspected import: run Carfax or AutoCheck (paid, ~USD 30–45) — look for salvage/auction/flood records.",
+  "Physically match the VIN on the windscreen plate, door-jamb sticker, and Mulkiya (registration card). Mismatch = walk away.",
+  "GCC tells: Arabic/English door-jamb sticker, rear AC vents on many models, no US-market inspection stickers."],
+  links:[["Carfax","https://www.carfax.com"],["AutoCheck","https://www.autocheck.com"],["Free VIN decode","https://www.google.com/search?q=free+vin+decoder"]],
+  warn:"Verify links are current; decoder quality varies."},
+ history:{title:"Accident, fines & ownership history (UAE)",steps:[
+  "Dubai-registered cars: use the Dubai Police app/website → 'Vehicle Status / Accident History' with the chassis number.",
+  "Check RTA fines against the plate — heavy Salik/fine history hints at hard fleet use.",
+  "Ask directly: first owner? company or private? Cross-check the Mulkiya owner name against who you're meeting.",
+  "Ex-rental tells: >25K km/yr in early years, wear on pedals/seat bolster beyond the mileage, fleet service stamps, many prior owners on the record.",
+  "Emirates Vehicle Gate (MOI) can show registration history for other emirates."],
+  links:[["Dubai Police","https://www.dubaipolice.gov.ae"],["RTA Dubai","https://www.rta.ae"],["Search: 'vehicle accident history check UAE chassis'","https://www.google.com/search?q=vehicle+accident+history+check+uae+chassis+number"]],
+  warn:"Portal flows change often — links from knowledge cutoff, verify current path."},
+ finance:{title:"Finance / mortgage clearance",steps:[
+  "Ask: is there an outstanding loan? (Listings often show 'currently financed').",
+  "If yes: the bank's mortgage must be cleared before RTA transfer. NEVER pay the seller cash to 'settle it themselves'.",
+  "Use platform escrow (CarSwitch/Cars24 handle this) or do the settlement AT the seller's bank: your payment goes to the bank, bank issues clearance letter, then transfer same day.",
+  "Verify no impound/traffic block at RTA before paying anything."],
+  links:[["RTA vehicle services","https://www.rta.ae"]],
+  warn:"Process varies by bank; insist on bank-supervised settlement."},
+ service:{title:"Verifying service history (don't trust the book)",steps:[
+  "Dealer-serviced? Call the dealer with the VIN — their records are digital and can't be forged by a seller. (Mazda: Galadari Automobiles.)",
+  "Chain workshops (AutoPro, ZDegree etc.): phone the branch on the stamp and confirm the visit.",
+  "Check mileage progression across stamps — it should climb sensibly. Gaps or jumps are tells.",
+  "Cross-check the last-service sticker on the windscreen/door jamb against the book.",
+  "No book but clean inspection beats full book with sludge under the oil cap."],
+  links:[["Galadari Mazda UAE","https://www.mazdauae.com"],["Search dealer service records","https://www.google.com/search?q=check+car+service+history+dealer+uae"]],
+  warn:"Dealer names from knowledge cutoff — confirm current distributor."},
+ odo:{title:"Odometer tampering check",steps:[
+  "Compare claimed km against wear: pedal rubbers, steering wheel shine, driver seat bolster, gear knob. 100K-km wear on a '60K' car = tampered.",
+  "The OBD scan (part of your inspection) can expose mileage stored in modules that clockers miss.",
+  "Cross-check km recorded at each service stamp and on any RTA test certificates.",
+  "Suspiciously low km/year on a cheap car is the classic tamper profile — treat 'lady-driven, weekend only' claims as unverified."],
+  links:[],warn:""},
+ recall:{title:"Recall / campaign verification by VIN",steps:[
+  "Call the official distributor's service department with the VIN and ask: 'any open recalls or completed campaigns on this chassis?' It's free.",
+  "For Mazda: Galadari. Ask specifically about the fuel-pump recall (2018–19) and cylinder-deactivation campaign (2018+).",
+  "Open recall = have it done free at the dealer before/after purchase; completed = paperwork peace of mind.",
+  "Global recall databases can help but the distributor's answer is the one that counts for GCC cars."],
+  links:[["Mazda UAE","https://www.mazdauae.com"],["Search: '[brand] UAE recall check VIN'","https://www.google.com/search?q=car+recall+check+by+vin+uae"]],
+  warn:"Recall knowledge has a cutoff — the dealer's VIN answer is definitive."},
+ tyres:{title:"Reading tyres",steps:[
+  "Find the DOT code on the sidewall — last 4 digits = week/year made (e.g. 2322 = week 23, 2022). Gulf heat kills rubber in ~4 years regardless of tread.",
+  "All four the same brand/model? Mismatched = cheap ownership or single-corner damage.",
+  "Uneven wear across one tyre's width = alignment issues or accident geometry.",
+  "Budget AED 1,200–2,000 for a set if they're old — negotiation lever."],
+  links:[],warn:""}
+};
 
-/* ---------------- generic check builders ---------------- */
-function ageChecks(age){
-  const c=[];
-  if(age>=4) c.push(["check","<b>AC performance</b> — must blow genuinely cold at idle in direct sun. Gulf heat kills compressors and condensers; a recharge 'fix' hides real faults."]);
-  if(age>=6){
-    c.push(["check","<b>All rubber:</b> engine mounts, suspension bushings, door seals, hoses — heat-cracking is age-driven, not mileage-driven."]);
-    c.push(["check","<b>Battery & charging</b> — batteries last 2–3 years here; check date code and alternator output."]);
-  }
-  if(age>=8){
-    c.push(["check","<b>Paint & interior sun damage</b> — clearcoat peel on roof/bonnet, cracked dash, sagging headliner. Bargaining levers, and resale killers."]);
-    c.push(["check","<b>Radiator, water pump, thermostat</b> — pressure-test the cooling system; original parts at this age are on borrowed time."]);
-  }
-  if(age>=12) c.push(["note","<b>12+ years old:</b> assume every wear item not documented as replaced is due. Price the car accordingly."]);
-  return c;
-}
-function kmChecks(km){
-  const c=[];
-  if(km>=80000) c.push(["check","<b>Brake discs & pads</b> — measure remaining pad life; feel for judder under firm braking."]);
-  if(km>=120000){
-    c.push(["must","<b>Automatic transmission behaviour warm</b> — drive 15+ minutes: shifts must be smooth, no jerks, flares, or whines. The single most expensive failure point."]);
-    c.push(["check","<b>Suspension over bumps</b> — knocks/rattles = bushings, links, or shocks due."]);
-  }
-  if(km>=150000){
-    c.push(["must","<b>Oil cap / valve cover look</b> — inspector removes oil cap: golden-brown metal = cared for; black sludge = walk away regardless of paperwork."]);
-    c.push(["check","<b>Cold-start test</b> — arrive before the seller warms it up. Rattles, smoke, or rough idle on true cold start reveal wear a warm engine hides."]);
-    c.push(["check","<b>Oil leaks</b> — valve cover, oil pan, axle seals. Small seepage is normal; drips are negotiation or a walk."]);
-  }
-  if(km>=200000) c.push(["note","<b>200K+ km:</b> buy this as a run-it-into-the-ground car. Assume near-zero resale in 3–4 years; the price must reflect that."]);
-  return c;
-}
-const UNIVERSAL = [
-  ["must","<b>Independent pre-purchase inspection</b> (~AED 300) — non-negotiable, before any money changes hands."],
-  ["must","<b>GCC specs verification</b> — VIN decode, not the listing badge. Non-GCC = insurance loading, resale penalty, possible auction history."],
-  ["must","<b>Accident & history check</b> — RTA / Dubai Police chassis check; ask for the VIN before the viewing. Refusal = answer."],
-  ["must","<b>Finance clearance</b> — if the car has a loan, the bank must be settled before transfer. Never pay the seller directly; use platform/bank escrow."],
-  ["check","<b>Service history verification</b> — call the workshop on the stamps; dealer records live against the VIN and can't be forged. Check mileage climbs sensibly across visits."],
-  ["check","<b>Odometer sanity</b> — ECU scan can expose tampering; cross-check wear (pedals, steering wheel, driver seat) against the claimed km."],
-  ["check","<b>Tyres</b> — DOT date codes (heat ages rubber in ~4 years regardless of tread), matching brands, even wear (uneven = alignment or accident)."],
-  ["note","<b>All keys & manuals</b> — one key = AED 800–1,500 replacement on modern cars. Bargaining lever."]
-];
+const SEC_PHOTO = {
+ known:{label:"Engine bay / oil cap photos",hint:"Open bonnet: wide shot + oil filler cap (underside) + around valve cover",
+  prompt:"You are helping with a used-car pre-purchase check. These photos show the engine bay and/or oil filler cap of the car described. Assess ONLY what is visible: sludge or mayonnaise under the oil cap, oil leaks/seepage around valve cover and pan, coolant colour/residue, corroded terminals, non-stock or disturbed parts, general care level. Be specific about what you can and cannot judge from photos. End with one of: LOOKS CARED FOR / NEGOTIATE / WALK AWAY, with reasons."},
+ mileage:{label:"Odometer / dash photos",hint:"Ignition on: full instrument cluster showing odometer and any warning lights",
+  prompt:"These photos show the instrument cluster/odometer. 1) Read the exact odometer value and compare it with the claimed mileage in the car details — flag any mismatch. 2) Identify every warning light visible and what it means. 3) Note service reminders or trip data if visible. Be precise; if unreadable, say so."},
+ age:{label:"Exterior / interior photos",hint:"Panels in daylight, roof/bonnet paint, dash top, driver seat, tyre sidewall with DOT code",
+  prompt:"These photos show exterior/interior condition. Assess: clearcoat peel or sun damage (roof/bonnet), respray tells (overspray, mismatched panels, panel-gap inconsistency), dash cracking, seat wear vs claimed mileage, tyre DOT date if legible. Flag anything suggesting accident repair or odometer inconsistency. State confidence for each observation. End with: condition grade (A/B/C/D) and top 2 negotiation levers."},
+ uae:{label:"Documents photos",hint:"Service book stamps, Mulkiya (registration card), inspection reports",
+  prompt:"These photos show vehicle documents (service records / UAE registration). Extract: service dates and mileages in order — does the progression climb sensibly toward the claimed mileage? Any gaps >18 months? Workshop names (dealer vs generic)? From the Mulkiya if shown: registration expiry, owner type hints. Flag anything inconsistent with the car details provided. If text is unreadable, say which parts."}
+};
 
-/* ---------------- ui ---------------- */
-const brandSel=document.getElementById("brand"), modelSel=document.getElementById("model");
-brandSel.innerHTML = BRANDS.map(b=>`<option>${b}</option>`).join("") + `<option>Other</option>`;
-function fillModels(){
-  const b=brandSel.value;
-  const models = DB[b] ? Object.keys(DB[b]) : [];
-  modelSel.innerHTML = models.map(m=>`<option>${m}</option>`).join("") + `<option>Other / not listed</option>`;
-}
-brandSel.addEventListener("change",fillModels);
-fillModels();
-brandSel.value="Mazda"; fillModels(); modelSel.value="6";
+/* ================= STATE ================= */
+const state = {
+  cars: JSON.parse(localStorage.getItem("garage_v2")||"[]"),
+  currentCar:null, photos:{}, view:"garage"
+};
+const save = ()=>localStorage.setItem("garage_v2",JSON.stringify(state.cars));
+const $ = id=>document.getElementById(id);
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const car = ()=>state.cars.find(c=>c.id===state.currentCar);
 
-document.getElementById("go").addEventListener("click",()=>{
-  const brand=brandSel.value, model=modelSel.value;
-  const year=parseInt(document.getElementById("year").value,10);
-  const km=parseInt(document.getElementById("km").value,10);
-  if(!year||!km){alert("Enter make year and mileage.");return;}
-  const age=new Date().getFullYear()-year;
+/* ================= GENERIC CHECKS ================= */
+function ageChecks(age){const c=[];
+ if(age>=4)c.push({tag:"check",txt:"<b>AC performance</b> — must blow genuinely cold at idle in direct sun. A recharge 'fix' hides real faults."});
+ if(age>=6){c.push({tag:"check",txt:"<b>All rubber:</b> mounts, bushings, seals, hoses — heat-cracking is age-driven."});
+  c.push({tag:"check",txt:"<b>Battery & charging</b> — batteries last 2–3 yrs here; check date code."});}
+ if(age>=8){c.push({tag:"check",txt:"<b>Paint & interior sun damage</b> — clearcoat peel, cracked dash, sagging headliner. Bargaining levers.",guide:"tyres"});
+  c.push({tag:"check",txt:"<b>Cooling system</b> — pressure test; original radiator/pump at this age is borrowed time."});}
+ if(age>=12)c.push({tag:"note",txt:"<b>12+ years:</b> assume every undocumented wear item is due. Price accordingly."});
+ return c;}
+function kmChecks(km){const c=[];
+ if(km>=80000)c.push({tag:"check",txt:"<b>Brake discs & pads</b> — measure pad life; feel for judder."});
+ if(km>=120000){c.push({tag:"must",txt:"<b>Transmission behaviour warm</b> — 15+ min drive: smooth shifts, no jerks/flares/whines. The most expensive failure point."});
+  c.push({tag:"check",txt:"<b>Suspension over bumps</b> — knocks = bushings/links/shocks due."});}
+ if(km>=150000){c.push({tag:"must",txt:"<b>Oil cap / valve cover look</b> — golden-brown metal = cared for; black sludge = walk away regardless of paperwork.",guide:"service"});
+  c.push({tag:"check",txt:"<b>Cold-start test</b> — arrive before the seller warms it. Rattles/smoke on true cold start reveal hidden wear."});
+  c.push({tag:"check",txt:"<b>Oil leaks</b> — seepage is normal; drips are negotiation or a walk."});}
+ if(km>=200000)c.push({tag:"note",txt:"<b>200K+:</b> run-it-into-the-ground purchase. Near-zero resale in 3–4 yrs — price must reflect it."});
+ return c;}
+const UNIVERSAL=[
+ {tag:"must",txt:"<b>Independent pre-purchase inspection</b> (~AED 300) — before any money.",guide:"inspect"},
+ {tag:"must",txt:"<b>GCC specs verification</b> — VIN decode, not the listing badge.",guide:"vin"},
+ {tag:"must",txt:"<b>Accident & history check</b> — chassis check; ask for the VIN before viewing.",guide:"history"},
+ {tag:"must",txt:"<b>Finance clearance</b> — bank settled before transfer; never pay the seller directly.",guide:"finance"},
+ {tag:"check",txt:"<b>Service history verification</b> — dealer records by VIN can't be forged.",guide:"service"},
+ {tag:"check",txt:"<b>Odometer sanity</b> — wear vs claimed km; ECU scan.",guide:"odo"},
+ {tag:"check",txt:"<b>Tyres</b> — DOT dates, matching brands, even wear.",guide:"tyres"},
+ {tag:"note",txt:"<b>All keys & manuals</b> — one key = AED 800–1,500. Bargaining lever."}];
 
-  // model-specific
-  let specific=[];
-  if(DB[brand] && DB[brand][model]){
-    specific = DB[brand][model].filter(i=>year>=i.yr[0]&&year<=i.yr[1]).map(i=>[i.tag,i.txt]);
-  }
-  const unknown = !(DB[brand]&&DB[brand][model]);
+function riskOf(c){
+ const age=new Date().getFullYear()-c.year;
+ const spec=modelIssues(c).filter(i=>i.tag==="must").length;
+ if(c.km>=180000||age>=12||spec>=2)return["risk-high","High diligence"];
+ if(c.km>=120000||age>=8||spec>=1)return["risk-med","Elevated diligence"];
+ return["risk-low","Standard diligence"];}
+function modelIssues(c){
+ const m=DB[c.brand]&&DB[c.brand][c.model];
+ return m?m.issues.filter(i=>c.year>=i.yr[0]&&c.year<=i.yr[1]):[];}
 
-  // risk stamp
-  const mustCount = specific.filter(c=>c[0]==="must").length;
-  let risk="risk-low", riskTxt="Standard diligence";
-  if(km>=180000||age>=12||mustCount>=2){risk="risk-high";riskTxt="High diligence";}
-  else if(km>=120000||age>=8||mustCount>=1){risk="risk-med";riskTxt="Elevated diligence";}
+/* ================= VIEWS ================= */
+function showView(v){state.view=v;
+ ["garage","car","compare","ai"].forEach(x=>$("view-"+x).classList.toggle("hidden",x!==v));
+ ["Garage","Compare","AI"].forEach(n=>{const b=$("nav"+n);if(b)b.classList.toggle("active",
+   (n==="Garage"&&(v==="garage"||v==="car"))||(n==="Compare"&&v==="compare")||(n==="AI"&&v==="ai"));});
+ if(v==="garage")renderGarage(); if(v==="compare")renderWeights();}
+function showTab(t){["checks","proscons","price","verdict"].forEach(x=>{
+  $("tab-"+x).classList.toggle("hidden",x!==t);});
+ document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));}
 
-  // render
-  document.getElementById("jcCar").textContent=`${brand} ${model==="Other / not listed"?"":model}`.trim();
-  document.getElementById("jcMeta").textContent=`${year} · ${km.toLocaleString()} km · ~${age} yrs · ~${Math.round(km/Math.max(age,1)/1000)}K km/yr`;
-  const stamp=document.getElementById("jcStamp");
-  stamp.textContent=riskTxt; stamp.className="stamp "+risk;
+/* ------- garage ------- */
+const BRANDS=Object.keys(DB).sort();
+$("fBrand").innerHTML=BRANDS.map(b=>`<option>${b}</option>`).join("")+`<option>Other</option>`;
+function fillModels(){const b=$("fBrand").value,ms=DB[b]?Object.keys(DB[b]):[];
+ $("fModel").innerHTML=ms.map(m=>`<option>${m}</option>`).join("")+`<option>Other</option>`;}
+$("fBrand").addEventListener("change",fillModels);fillModels();
+$("fBrand").value="Mazda";fillModels();$("fModel").value="6";
 
-  const sec=(title,items)=> items.length?`
-    <div class="section"><div class="sec-title">${title}</div>
-      ${items.map(([t,txt])=>`<div class="check" onclick="this.classList.toggle('done')"><span class="box"></span><span class="ct"><span class="tag ${t}">${t}</span>${txt}</span></div>`).join("")}
-    </div>`:"";
+function addCar(){
+ const c={id:Date.now(),brand:$("fBrand").value,model:$("fModel").value,
+  year:+$("fYear").value,km:+$("fKm").value,price:+$("fPrice").value||0,
+  checks:{},ai:{},comps:[],priceVerdict:null};
+ if(!c.year||!c.km){alert("Year and mileage are required.");return;}
+ state.cars.push(c);save();$("fYear").value="";$("fKm").value="";$("fPrice").value="";
+ renderGarage();}
+function deleteCar(id){if(!confirm("Remove this car from the garage?"))return;
+ state.cars=state.cars.filter(c=>c.id!==id);save();showView("garage");}
+function renderGarage(){
+ $("carList").innerHTML=state.cars.length?state.cars.map(c=>{
+  const[cls,txt]=riskOf(c);
+  return`<div class="carcard"><div>
+   <div class="cc-name">${esc(c.brand)} ${esc(c.model)}</div>
+   <div class="cc-meta">${c.year} · ${c.km.toLocaleString()} km${c.price?" · AED "+c.price.toLocaleString():""}</div></div>
+   <div class="row"><span class="stamp ${cls}">${txt}</span>
+   <button class="btn small" onclick="openCar(${c.id})">Open</button></div></div>`;}).join("")
+  :`<div class="panel" style="text-align:center;color:var(--ink-soft)">Garage is empty — add your first candidate above.</div>`;}
 
-  let html="";
-  if(specific.length) html+=sec(`Known issues — ${brand} ${model} (${year})`,specific);
-  if(unknown) html+=sec("Model notes",[["note",`No model-specific database entry for this car. The age, mileage, and UAE checks below still apply — and research "<b>${brand} ${model} ${year} common problems</b>" before viewing.`]]);
-  html+=sec(`Mileage-based — ${km.toLocaleString()} km`,kmChecks(km));
-  html+=sec(`Age-based — ${age} years in Gulf heat`,ageChecks(age));
-  html+=sec("Always — UAE market",UNIVERSAL);
-  document.getElementById("jcSections").innerHTML=html;
+/* ------- car detail ------- */
+function openCar(id){state.currentCar=id;showView("car");
+ const c=car(),age=new Date().getFullYear()-c.year,[cls,txt]=riskOf(c);
+ $("dName").textContent=`${c.brand} ${c.model}`;
+ $("dMeta").textContent=`${c.year} · ${c.km.toLocaleString()} km · ~${age} yrs · ~${Math.round(c.km/Math.max(age,1)/1000)}K km/yr${c.price?" · AED "+c.price.toLocaleString():""}`;
+ const st=$("dStamp");st.textContent=txt;st.className="stamp "+cls;
+ renderChecks();renderProsCons();renderPrice();renderVerdictTab();showTab("checks");}
 
-  const kmPerYr=km/Math.max(age,1);
-  let verdict=`<b>Read:</b> `;
-  if(kmPerYr>28000) verdict+=`~${Math.round(kmPerYr/1000)}K km/year suggests fleet, company, or heavy-commuter use — likely highway kilometres (gentler), but verify ownership history carefully. `;
-  else if(kmPerYr<10000) verdict+=`Unusually low km/year — verify the odometer via ECU scan and service-record progression; low mileage claims are where tampering lives. `;
-  else verdict+=`Mileage-per-year looks like normal private use. `;
-  if(risk==="risk-high") verdict+=`This car needs the full inspection treatment — every <b>MUST</b> item is a walk-away trigger if it fails.`;
-  else if(risk==="risk-med") verdict+=`Solid candidate if the <b>MUST</b> items clear. Use any <b>CHECK</b> findings as negotiation levers.`;
-  else verdict+=`Younger/lower-mileage car — the main risks are history and paperwork, not mechanical wear. Don't skip the inspection anyway.`;
-  document.getElementById("jcVerdict").innerHTML=verdict;
+function checkRow(item,idx,secId){
+ const c=car(),key=secId+"_"+idx,done=c.checks[key]?"done":"";
+ const g=item.guide?`<button class="guide-btn" title="How to do this" onclick="event.stopPropagation();toggleGuide('${secId}',${idx})">🔍</button>`:"";
+ let guideHtml="";
+ if(item.guide){const G=GUIDES[item.guide];
+  guideHtml=`<div class="guide" id="g_${secId}_${idx}"><b>${G.title}</b><ol>${G.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+   ${G.links.length?G.links.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join(" · "):""}
+   ${G.warn?`<div class="g-warn">⚠ ${G.warn}</div>`:""}</div>`;}
+ return`<div class="check ${done}" onclick="toggleCheck('${key}',this)">
+  <span class="box"></span><span class="ct"><span class="tag ${item.tag}">${item.tag}</span>${item.txt} ${g}</span>${guideHtml}</div>`;}
+function toggleCheck(key,el){const c=car();c.checks[key]=!c.checks[key];el.classList.toggle("done");save();}
+function toggleGuide(s,i){$(`g_${s}_${i}`).classList.toggle("open");}
 
-  document.getElementById("result").style.display="block";
-  document.getElementById("result").scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?"auto":"smooth"});
-});
-document.getElementById("printBtn").addEventListener("click",()=>window.print());
-document.getElementById("resetBtn").addEventListener("click",()=>{
-  document.getElementById("result").style.display="none";
-  window.scrollTo({top:0});
-});
+function photoBlock(secId){
+ const c=car(),cfg=SEC_PHOTO[secId],aiSaved=c.ai[secId];
+ return`<div style="margin-top:10px">
+  <div class="photobar">
+   <input type="file" id="ph_${secId}" accept="image/*" multiple capture="environment" class="hidden" onchange="loadPhotos('${secId}',this)">
+   <button class="btn ghost small" onclick="$('ph_${secId}').click()">📷 ${cfg.label}</button>
+   <button class="btn ai small" id="an_${secId}" onclick="analyzeSection('${secId}')" ${hasKey()?"":"disabled"}>${hasKey()?"Analyze with Claude":"AI locked — add key"}</button>
+  </div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-top:4px">${cfg.hint}</div>
+  <div class="thumbs" id="th_${secId}"></div>
+  <div id="ai_${secId}">${aiSaved?`<div class="airesult"><div class="ai-label">Claude read · saved</div>${esc(aiSaved)}</div>`:""}</div>
+ </div>`;}
+
+function renderChecks(){
+ const c=car(),age=new Date().getFullYear()-c.year;
+ const spec=modelIssues(c);
+ const sec=(id,title,items)=>items.length||SEC_PHOTO[id]?`
+  <div class="section"><div class="sec-head"><span class="sec-title">${title}</span></div>
+   ${items.map((it,i)=>checkRow(it,i,id)).join("")}
+   ${SEC_PHOTO[id]?photoBlock(id):""}</div>`:"";
+ let h="";
+ if(spec.length||!DB[c.brand]||!DB[c.brand][c.model]){
+  const items=spec.length?spec:[{tag:"note",txt:`No model-specific database entry. Research "<b>${esc(c.brand)} ${esc(c.model)} ${c.year} common problems</b>" — or use AI mode below.`}];
+  h+=sec("known",`Known issues — ${esc(c.brand)} ${esc(c.model)}`,items);}
+ h+=sec("mileage",`Mileage-based — ${c.km.toLocaleString()} km`,kmChecks(c.km));
+ h+=sec("age",`Age-based — ${age} yrs in Gulf heat`,ageChecks(age));
+ h+=sec("uae","Always — UAE market",UNIVERSAL);
+ $("tab-checks").innerHTML=h;
+ Object.keys(SEC_PHOTO).forEach(s=>renderThumbs(s));}
+
+/* ------- pros / cons ------- */
+function renderProsCons(){
+ const c=car(),m=DB[c.brand]&&DB[c.brand][c.model];
+ $("tab-proscons").innerHTML=m?`
+  <div class="pc"><div class="good"><h3>What the ${esc(c.model)} does well</h3><ul>${m.pros.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+  <div class="bad"><h3>What to accept going in</h3><ul>${m.cons.map(p=>`<li>${p}</li>`).join("")}</ul></div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-top:10px">Opinionated, from the builder's knowledge cutoff — a starting view, not gospel.</div>`
+ :`<p style="font-size:14px;color:var(--ink-soft)">No character notes for this model. AI mode can generate them — or read owner forums.</p>`;}
+
+/* ------- price ------- */
+function renderPrice(){
+ const c=car();
+ $("tab-price").innerHTML=`
+  <p style="font-size:14px;margin-bottom:10px">A static page can't know live prices — but <b>you</b> can. Enter 3–5 asking prices you've seen for the same model, similar year (±1) and mileage band, from Dubizzle / CarSwitch / Dubicars. The tool places this car against them.</p>
+  <label for="comps">Comparable asking prices (AED, comma-separated)</label>
+  <input id="comps" placeholder="31500, 29000, 33000, 30500" value="${(c.comps||[]).join(", ")}">
+  <div style="margin-top:10px"><button class="btn" onclick="runPrice()">Read the price</button></div>
+  <div id="priceOut">${c.priceVerdict?`<div class="verdictbox">${c.priceVerdict}</div>`:""}</div>`;}
+function runPrice(){
+ const c=car();
+ const comps=$("comps").value.split(",").map(x=>parseFloat(x.trim())).filter(x=>x>1000);
+ if(!c.price){alert("This car has no asking price — edit it by re-adding.");return;}
+ if(comps.length<2){alert("Enter at least 2 comparable prices.");return;}
+ c.comps=comps;
+ const sorted=[...comps].sort((a,b)=>a-b);
+ const med=sorted.length%2?sorted[(sorted.length-1)/2]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2;
+ const diff=(c.price-med)/med*100;
+ let v=`<b>Median of your comparables:</b> AED ${Math.round(med).toLocaleString()} · <b>This car:</b> AED ${c.price.toLocaleString()} (${diff>=0?"+":""}${diff.toFixed(1)}%)<br><br>`;
+ if(diff<=-12)v+=`<b>Well below market.</b> Attractive — but cheap has a reason. Prioritise the accident/history check, import verification, and odometer sanity before excitement. If it survives inspection, move fast.`;
+ else if(diff<=-4)v+=`<b>Below market.</b> Good starting position. Verify why (mileage? urgency? minor issues?) and still negotiate — sellers price expecting a haggle.`;
+ else if(diff<8)v+=`<b>At market.</b> Fair ask. Every CHECK finding from the job card is your discount lever. Open ~8–10% below asking.`;
+ else v+=`<b>Above market.</b> The seller must justify this with something real — dealer service history, recent major service, warranty. If they can't, your comparables ARE the negotiation: show them.`;
+ v+=`<br><br><span style="opacity:.8">Sanity note: at ${c.km.toLocaleString()} km, factor remaining life — a cheap high-miler and a fair low-miler can cost the same per year.</span>`;
+ c.priceVerdict=v;save();
+ $("priceOut").innerHTML=`<div class="verdictbox">${v}</div>`;}
+
+/* ------- AI ------- */
+function hasKey(){return !!sessionStorage.getItem("ak");}
+function saveKey(){const k=$("apiKey").value.trim();
+ if(!k.startsWith("sk-ant")){alert("That doesn't look like an Anthropic key.");return;}
+ sessionStorage.setItem("ak",k);$("apiKey").value="";keyChip();
+ if(state.currentCar)renderChecks(),renderVerdictTab();}
+function clearKey(){sessionStorage.removeItem("ak");keyChip();
+ if(state.currentCar)renderChecks(),renderVerdictTab();}
+function keyChip(){const el=$("keyChip");
+ el.className="keychip "+(hasKey()?"key-on":"key-off");
+ el.textContent=hasKey()?"Key active this session — AI unlocked":"No key — AI features locked";}
+keyChip();
+
+async function callClaude(content,maxTok=1200){
+ const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
+  headers:{"Content-Type":"application/json","x-api-key":sessionStorage.getItem("ak"),
+   "anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+  body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:maxTok,messages:[{role:"user",content}]})});
+ if(!res.ok){const t=await res.text();
+  throw new Error(res.status===401?"Key rejected — check it and save again.":`API error ${res.status}: ${t.slice(0,200)}`);}
+ const d=await res.json();
+ return d.content.filter(b=>b.type==="text").map(b=>b.text).join("\n");}
+
+function resizeImage(file){return new Promise((ok,bad)=>{
+ const img=new Image(),r=new FileReader();
+ r.onload=()=>{img.onload=()=>{
+   const M=1568,sc=Math.min(1,M/Math.max(img.width,img.height));
+   const cv=document.createElement("canvas");cv.width=img.width*sc;cv.height=img.height*sc;
+   cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+   ok(cv.toDataURL("image/jpeg",.85).split(",")[1]);};
+  img.onerror=bad;img.src=r.result;};
+ r.onerror=bad;r.readAsDataURL(file);});}
+
+async function loadPhotos(secId,input){
+ const files=[...input.files].slice(0,4);
+ state.photos[secId]=[];
+ for(const f of files)state.photos[secId].push(await resizeImage(f));
+ renderThumbs(secId);}
+function renderThumbs(secId){
+ const t=$("th_"+secId);if(!t)return;
+ t.innerHTML=(state.photos[secId]||[]).map(b=>`<img src="data:image/jpeg;base64,${b}" alt="upload">`).join("");}
+
+function carContext(){const c=car(),age=new Date().getFullYear()-c.year;
+ return`Car under inspection: ${c.brand} ${c.model}, ${c.year} model (${age} yrs old), claimed mileage ${c.km.toLocaleString()} km, asking price ${c.price?("AED "+c.price.toLocaleString()):"not given"}. Market: UAE (Dubai), GCC context, extreme heat climate. Buyer: first-time UAE buyer, family of 3, ~30,000 km/year usage, plans Oman/Saudi road trips.`;}
+
+async function analyzeSection(secId){
+ const ph=state.photos[secId]||[];
+ if(!ph.length){alert("Upload photos for this section first.");return;}
+ const btn=$("an_"+secId);btn.disabled=true;btn.innerHTML=`<span class="spin"></span>Reading...`;
+ const out=$("ai_"+secId);
+ try{
+  const content=[...ph.map(b=>({type:"image",source:{type:"base64",media_type:"image/jpeg",data:b}})),
+   {type:"text",text:carContext()+"\n\n"+SEC_PHOTO[secId].prompt+"\n\nBe concise and practical. Plain text, no markdown headers."}];
+  const txt=await callClaude(content);
+  car().ai[secId]=txt;save();
+  out.innerHTML=`<div class="airesult"><div class="ai-label">Claude read · saved</div>${esc(txt)}</div>`;
+ }catch(e){out.innerHTML=`<div class="airesult" style="border-color:var(--safety)"><div class="ai-label" style="color:var(--safety)">Error</div>${esc(e.message)}</div>`;}
+ btn.disabled=false;btn.textContent="Analyze with Claude";}
+
+/* ------- AI verdict tab ------- */
+function renderVerdictTab(){
+ const c=car();
+ $("tab-verdict").innerHTML=`
+  <p style="font-size:14px;margin-bottom:10px">Pulls together everything on this card — car details, ticked checks, photo reads, price verdict — and asks Claude for an overall buy / negotiate / walk recommendation. It can also fill gaps for models not in the local database.</p>
+  <div class="row">
+   <button class="btn ai" id="ovBtn" onclick="overallVerdict()" ${hasKey()?"":"disabled"}>${hasKey()?"Generate overall verdict":"AI locked — add key in AI Key tab"}</button>
+  </div>
+  <div id="ovOut" style="margin-top:10px">${c.ai.overall?`<div class="airesult"><div class="ai-label">Overall verdict · saved</div>${esc(c.ai.overall)}</div>`:""}</div>
+  <div style="margin-top:16px">
+   <label for="qq">Ask anything about this car</label>
+   <textarea id="qq" rows="2" placeholder="e.g. Is 199,000 km too much for this engine? What should I offer?"></textarea>
+   <div style="margin-top:8px"><button class="btn ai small" onclick="askQ()" ${hasKey()?"":"disabled"}>Ask</button></div>
+   <div id="qOut"></div>
+  </div>`;}
+async function overallVerdict(){
+ const c=car(),btn=$("ovBtn");btn.disabled=true;btn.innerHTML=`<span class="spin"></span>Thinking...`;
+ const done=Object.entries(c.checks).filter(([k,v])=>v).map(([k])=>k);
+ let prompt=carContext()+"\n\n";
+ if(done.length)prompt+=`Checks the buyer has already completed/ticked: ${done.join(", ")}\n`;
+ Object.keys(SEC_PHOTO).forEach(s=>{if(c.ai[s])prompt+=`\nSaved photo analysis (${s} section):\n${c.ai[s]}\n`;});
+ if(c.priceVerdict)prompt+=`\nPrice check result (HTML stripped): ${c.priceVerdict.replace(/<[^>]+>/g,"")}\n`;
+ prompt+=`\nGive an overall pre-purchase verdict for this specific car: 1) top 3 risks in priority order, 2) what still MUST be verified before paying, 3) a negotiation stance with a suggested opening offer if a price is given, 4) final call: PURSUE / PURSUE WITH CONDITIONS / WALK. If this model has known issues for this year that weren't mentioned, add them. Concise plain text, no markdown headers.`;
+ try{const txt=await callClaude([{type:"text",text:prompt}],1500);
+  c.ai.overall=txt;save();
+  $("ovOut").innerHTML=`<div class="airesult"><div class="ai-label">Overall verdict · saved</div>${esc(txt)}</div>`;
+ }catch(e){$("ovOut").innerHTML=`<div class="airesult" style="border-color:var(--safety)"><div class="ai-label" style="color:var(--safety)">Error</div>${esc(e.message)}</div>`;}
+ btn.disabled=false;btn.textContent="Generate overall verdict";}
+async function askQ(){
+ const q=$("qq").value.trim();if(!q)return;
+ $("qOut").innerHTML=`<div class="airesult"><div class="ai-label">Thinking…</div></div>`;
+ try{const txt=await callClaude([{type:"text",text:carContext()+"\n\nBuyer's question: "+q+"\n\nAnswer concisely and practically for the UAE used market. Plain text."}],800);
+  $("qOut").innerHTML=`<div class="airesult"><div class="ai-label">Claude</div>${esc(txt)}</div>`;
+ }catch(e){$("qOut").innerHTML=`<div class="airesult" style="border-color:var(--safety)"><div class="ai-label" style="color:var(--safety)">Error</div>${esc(e.message)}</div>`;}}
+
+/* ------- compare ------- */
+const AXES=[["price","Price value"],["cond","Condition risk"],["run","Running cost"],["fam","Family fit"],["drive","Driving feel"],["rel","Reliability"]];
+const DEFW={price:4,cond:5,run:4,fam:5,drive:3,rel:5};
+function renderWeights(){
+ $("weights").innerHTML=AXES.map(([k,l])=>`<div class="wl"><label>${l}</label>
+  <input type="range" min="0" max="5" value="${DEFW[k]}" id="w_${k}" oninput="$('wv_${k}').textContent=this.value">
+  <span id="wv_${k}" style="font-family:'IBM Plex Mono',monospace;font-size:12px">${DEFW[k]}</span></div>`).join("");}
+function axisScores(c){
+ const age=new Date().getFullYear()-c.year;
+ const m=DB[c.brand]&&DB[c.brand][c.model],r=m?m.r:{run:3,fam:3,drive:3,rel:3};
+ // condition: blend km + age (5 = fresh)
+ const kmS=c.km<80000?5:c.km<120000?4:c.km<160000?3:c.km<200000?2:1;
+ const agS=age<4?5:age<7?4:age<10?3:age<13?2:1;
+ const cond=Math.round((kmS*0.6+agS*0.4)*10)/10;
+ // price: from comparables if run, else neutral
+ let price=3;
+ if(c.comps&&c.comps.length>=2&&c.price){
+  const s=[...c.comps].sort((a,b)=>a-b);
+  const med=s.length%2?s[(s.length-1)/2]:(s[s.length/2-1]+s[s.length/2])/2;
+  const d=(c.price-med)/med;
+  price=d<=-0.12?5:d<=-0.04?4:d<0.08?3:d<0.15?2:1;}
+ return{price,cond,run:r.run,fam:r.fam,drive:r.drive,rel:r.rel};}
+function runCompare(){
+ if(state.cars.length<2){$("compareOut").innerHTML=`<div class="panel" style="color:var(--ink-soft)">Add at least two cars to the garage first.</div>`;return;}
+ const w={};AXES.forEach(([k])=>w[k]=+$("w_"+k).value);
+ const tw=Object.values(w).reduce((a,b)=>a+b,0)||1;
+ const rows=state.cars.map(c=>{
+  const s=axisScores(c);
+  const total=AXES.reduce((sum,[k])=>sum+s[k]*w[k],0)/tw;
+  return{c,s,total};}).sort((a,b)=>b.total-a.total);
+ const noPrice=rows.some(r=>r.s.price===3&&!(r.c.comps&&r.c.comps.length>=2));
+ $("compareOut").innerHTML=rows.map((r,i)=>{
+  const best=AXES.filter(([k])=>r.s[k]>=4.5||r.s[k]===Math.max(...rows.map(x=>x.s[k]))&&r.s[k]>=4).slice(0,2).map(([k,l])=>l);
+  const worst=AXES.filter(([k])=>r.s[k]<=2).map(([k,l])=>l);
+  return`<div class="rank ${i===0?"winner":""}">
+   <div class="r-head"><div><span class="r-pos">#${i+1}${i===0?" · LEADS":""}</span>
+    <div class="cc-name">${esc(r.c.brand)} ${esc(r.c.model)}</div>
+    <div class="cc-meta">${r.c.year} · ${r.c.km.toLocaleString()} km${r.c.price?" · AED "+r.c.price.toLocaleString():""}</div></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:20px">${r.total.toFixed(2)}<span style="font-size:11px;color:var(--ink-soft)">/5</span></div></div>
+   <div style="margin-top:8px">${AXES.map(([k,l])=>`<div class="r-axis">${l} · ${r.s[k]}</div><div class="bar"><i style="width:${r.s[k]/5*100}%"></i></div>`).join("")}</div>
+   <div style="font-size:13px;margin-top:4px">${best.length?`<b>Leads on:</b> ${best.join(", ")}. `:""}${worst.length?`<b>Weak on:</b> ${worst.join(", ")}.`:""}</div>
+  </div>`;}).join("")+
+  `<div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-top:6px">
+   Scores blend your weights with model character ratings (builder's opinion), mileage/age condition math${noPrice?", and a NEUTRAL price score where no comparables were entered — run each car's Price Check for a sharper ranking":""}.
+   A ranking is a conversation starter, not a decision — read the bars, not just the winner.</div>`;}
+
+/* init */
+renderGarage();
 </script>
 </body>
 </html>
