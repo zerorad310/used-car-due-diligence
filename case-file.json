@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-25T00:00:00Z",
+  "mission": "One-year bridge car for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Target: Mazda 6 2.5L Skyactiv-G, GCC, 2015–2018. Charger/Mustang deferred to year three.",
+  "hardRules": [
+    "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
+    "2.5L Skyactiv-G engine only. Never infer from listing filters (1500–1999cc bracket hides 1.6L/2.0L). Confirm via VIN or mulkiya.",
+    "No Sharjah registration — hard geographic exclusion.",
+    "AutoTrust chassis check (800 2978) mandatory on any serious candidate.",
+    "Independent ~AED 300 garage inspection (buyer's choice of garage) before any payment. Never Dubizzle Book Inspection (2.6 Trustpilot, conflict of interest).",
+    "Total cost of ownership: sticker + AED 4,000–7,000 year-one risk buffer on older/high-km cars.",
+    "2018–19 cars: verify rocker-arm campaign + Denso fuel pump recall via VIN at Galadari before considering."
+  ],
+  "budget": {
+    "strategy": "One-year bridge purchase",
+    "targetAED": [
+      18000,
+      22000
+    ],
+    "ceilingAED": 35000,
+    "repairReserveAED": [
+      5000,
+      10000
+    ],
+    "note": "Sub-25K listings reliably fail at least one hard rule in this market — treat cheap listings with extra suspicion, not excitement."
+  },
+  "candidates": [
+    {
+      "id": "c1",
+      "title": "2015 Mazda 6 2.5L — Dubai (fleet disposal)",
+      "status": "active",
+      "rank": "PRIMARY",
+      "priceAED": 22000,
+      "vin": "JM7GJ4S77F1138253",
+      "location": "Dubai",
+      "facts": [
+        "VIN decoded: confirmed GCC build, correct year",
+        "Seller's cost basis revealed at AED 20,000",
+        "No service history disclosed",
+        "Fleet disposal car"
+      ],
+      "openItems": [
+        "Run AutoTrust on VIN before offering"
+      ],
+      "verdict": "Primary under the bridge plan. If AutoTrust clean → open at AED 18,500–19,500."
+    },
+    {
+      "id": "c2",
+      "title": "Greeshma's 2016 Mazda 6 — Barsha Heights",
+      "status": "active",
+      "rank": "SECOND",
+      "priceAED": 36000,
+      "vin": "shared (on file)",
+      "location": "Barsha Heights, Dubai",
+      "facts": [
+        "5-year single ownership, bought from Al Futtaim",
+        "Loan cleared",
+        "Disclosed: bumper repaints, axle replacement, shock absorbers + mounting work",
+        "No service records"
+      ],
+      "openItems": [
+        "Engine bay photo still pending — get it BEFORE committing to visit",
+        "Visit being arranged for Tue/Wed evening"
+      ],
+      "verdict": "Over budget at ask. Anchor AED 30–31K justified by her own disclosures. Only worth it if condition is genuinely superior to c1."
+    },
+    {
+      "id": "c3",
+      "title": "2019 Mazda 6 2.5L — CarSwitch",
+      "status": "active",
+      "rank": "FALLBACK",
+      "priceAED": 39000,
+      "vin": "",
+      "location": "Dubai (CarSwitch)",
+      "facts": [
+        "~200,000 km",
+        "2019 = check rocker-arm campaign + Denso recall at Galadari"
+      ],
+      "openItems": [],
+      "verdict": "Low rank: high mileage + high capital + worse year-end resale for a one-year plan. Watch only."
+    },
+    {
+      "id": "d1",
+      "title": "Azhar's 2017 S Grade — AED 24,500 / 157K km",
+      "status": "dead",
+      "priceAED": 24500,
+      "deadReason": "Sold to another buyer."
+    },
+    {
+      "id": "d2",
+      "title": "Al Jada 2017 — AED 30K (AutoTrust documented)",
+      "status": "dead",
+      "priceAED": 30000,
+      "deadReason": "Sharjah registration — hard exclusion. Car quality was fine; do not re-evaluate."
+    },
+    {
+      "id": "d3",
+      "title": "2015 Mazda 6 — AED 19,500",
+      "status": "dead",
+      "priceAED": 19500,
+      "deadReason": "2.0L engine, fails hard rule."
+    }
+  ],
+  "eliminatedModels": [
+    "Mazda 3 1.6L (underpowered, old drivetrain)",
+    "Lexus IS / ES",
+    "Dodge Charger & Ford Mustang (deferred to year three: cheaper insurance after driving history)",
+    "MG5",
+    "Toyota Veloz",
+    "Japanese-spec Mercedes C350 (failed GCC-spec + budget rules)"
+  ],
+  "learnings": [
+    "Dubizzle trim dropdown is fiction — sellers invent GCC trims ('Grand Touring', '100th Anniversary').",
+    "2017 facelift meaningfully better for Atir's highway use: G-Vectoring Control, more sound deadening, thicker glass, retuned dampers.",
+    "Pre-2016 torque converter shudder = inspection/negotiation flag on high-km cars, not a disqualifier.",
+    "Colleagues' Mazda reliability objections apply to pre-2012, not Skyactiv era; their Maxima CVT suggestion fails their own logic.",
+    "Seller urgency ('another viewer coming') → neutral, non-committal response. Never show interest level.",
+    "WhatsApp qualification template before any visit: service records, engine bay photo, accident history, loan status, ownership story. Chassis number requested as routine."
+  ],
+  "decisions": [
+    {
+      "date": "2026-07",
+      "text": "Locked target: Mazda 6 2.5L Skyactiv-G, GCC, 2016–2018 preferred (2016–17 sweet spot).",
+      "scope": "global",
+      "src": "seed"
+    },
+    {
+      "date": "2026-07",
+      "text": "Revised annual mileage from assumed 30K to realistic 19–20K km/yr.",
+      "scope": "global",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "Strategy pivot: one-year bridge purchase ~AED 18–22K with 5–10K repair reserve, instead of 28–35K keeper.",
+      "scope": "global",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "Rented Mazda 6 (2024/25 base) via eZhire as reference baseline.",
+      "scope": "global",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "c1 (2015 Dubai, AED 22K) made PRIMARY candidate; offer 18.5–19.5K if AutoTrust clean.",
+      "scope": "c1",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "c2 (Greeshma 2016): negotiation anchor set at 30–31K from her own disclosures.",
+      "scope": "c2",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "Azhar's 2017 S Grade confirmed sold — removed.",
+      "scope": "d1",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08",
+      "text": "Al Jada 2017 dropped on Sharjah exclusion, not car quality.",
+      "scope": "d2",
+      "src": "seed"
+    }
+  ],
+  "nextActions": [
+    {
+      "id": "n1",
+      "text": "Call AutoTrust (800 2978) — chassis check on JM7GJ4S77F1138253",
+      "done": false
+    },
+    {
+      "id": "n2",
+      "text": "Chase Greeshma for engine bay photo (blocker for visit)",
+      "done": false
+    },
+    {
+      "id": "n3",
+      "text": "Confirm Tue/Wed evening visit window with Greeshma",
+      "done": false
+    },
+    {
+      "id": "n4",
+      "text": "Keep monitoring Dubizzle / FB Marketplace / CarSwitch / Dubicars / Al Aweer",
+      "done": false
+    }
+  ],
+  "summary": "",
+  "qa": {}
+}
