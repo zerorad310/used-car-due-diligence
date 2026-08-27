@@ -1,35 +1,33 @@
 {
-  "version": 1,
-  "updatedAt": "2026-08-27T15:28:46.837Z",
-  "mission": "One-year bridge car for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Target: Mazda 6 2.5L Skyactiv-G, GCC, 2015–2018. Charger/Mustang deferred to year three.",
+  "version": 3,
+  "updatedAt": "2026-08-25T00:00:00Z",
+  "mission": "Used Mazda 6 2.5L Skyactiv-G, GCC, 2015–2020 for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Horizon: flexible 1–4 years, governed by the repair caps below. Charger/Mustang deferred to year three.",
   "hardRules": [
     "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
     "2.5L Skyactiv-G engine only. Never infer from listing filters (1500–1999cc bracket hides 1.6L/2.0L). Confirm via VIN or mulkiya.",
     "No Sharjah registration — hard geographic exclusion.",
     "AutoTrust chassis check (800 2978) mandatory on any serious candidate.",
     "Independent ~AED 300 garage inspection (buyer's choice of garage) before any payment. Never Dubizzle Book Inspection (2.6 Trustpilot, conflict of interest).",
-    "Total cost of ownership: sticker + AED 4,000–7,000 year-one risk buffer on older/high-km cars.",
+    "REPAIR CAPS: expected repairs must fit ≤ AED 5,000 in year 1 AND ≤ AED 5,000 total across years 2–4. Cars unlikely to fit both caps fail, regardless of price.",
     "2018–19 cars: verify rocker-arm campaign + Denso fuel pump recall via VIN at Galadari before considering."
   ],
   "budget": {
-    "strategy": "One-year bridge purchase",
-    "targetAED": [
-      18000,
-      22000
-    ],
-    "ceilingAED": 35000,
-    "repairReserveAED": [
-      5000,
-      10000
-    ],
-    "note": "Sub-25K listings reliably fail at least one hard rule in this market — treat cheap listings with extra suspicion, not excitement."
+    "strategy": "Flexible horizon (1–4 yrs) with hard repair caps",
+    "purchaseCeilingAED": 35000,
+    "repairCapYear1AED": 5000,
+    "repairCapYears2to4AED": 5000,
+    "note": "The caps replace the old one-year-bridge framing. Consequence: documented service history and lower mileage now outweigh a cheaper sticker — a 200K-km car with unknown history rarely fits ≤5K/yr1 + ≤5K/3yrs. Sub-25K listings still reliably fail at least one hard rule."
   },
   "candidates": [
     {
       "id": "c1",
       "title": "2015 Mazda 6 2.5L — Dubai (fleet disposal)",
       "status": "active",
-      "rank": "PRIMARY",
+      "stars": 5,
+      "stage": "VIN OK",
+      "sellerName": "",
+      "source": "—",
+      "photo": "",
       "priceAED": 22000,
       "vin": "JM7GJ4S77F1138253",
       "location": "Dubai",
@@ -40,15 +38,20 @@
         "Fleet disposal car"
       ],
       "openItems": [
-        "Run AutoTrust on VIN before offering"
+        "Run AutoTrust on VIN before offering",
+        "Stress-test against new repair caps: no service history + high km is exactly the profile the caps penalise"
       ],
-      "verdict": "Primary under the bridge plan. If AutoTrust clean → open at AED 18,500–19,500."
+      "verdict": "Was primary under the old bridge plan. If AutoTrust clean → open at AED 18,500–19,500 — but only if inspection supports fitting the ≤5K/yr repair caps."
     },
     {
       "id": "c2",
       "title": "Greeshma's 2016 Mazda 6 — Barsha Heights",
       "status": "active",
-      "rank": "SECOND",
+      "stars": 4,
+      "stage": "Qualified",
+      "sellerName": "Greeshma",
+      "source": "—",
+      "photo": "",
       "priceAED": 36000,
       "vin": "shared (on file)",
       "location": "Barsha Heights, Dubai",
@@ -62,28 +65,63 @@
         "Engine bay photo still pending — get it BEFORE committing to visit",
         "Visit being arranged for Tue/Wed evening"
       ],
-      "verdict": "Over budget at ask. Anchor AED 30–31K justified by her own disclosures. Only worth it if condition is genuinely superior to c1."
+      "verdict": "Over ceiling at ask. Anchor AED 30–31K from her own disclosures. Recent suspension work helps the repair-cap case; missing records hurt it."
     },
     {
       "id": "c3",
-      "title": "2019 Mazda 6 2.5L — CarSwitch",
+      "title": "2019 Mazda 6 2.5L — CarSwitch, 199,700 km",
       "status": "active",
-      "rank": "FALLBACK",
+      "stars": 2,
+      "stage": "Spotted",
+      "sellerName": "",
+      "source": "Switch",
+      "photo": "",
+      "priceAED": 27000,
+      "vin": "",
+      "location": "Dubai (CarSwitch)",
+      "facts": [
+        "2.5L stated explicitly, GCC confirmed, inspection report attached",
+        "'First owner: No' — ~28K km/yr profile suggests ex-fleet/commercial use",
+        "2019 = recall year: Denso fuel pump + rocker arm campaign — Galadari VIN check mandatory, and fleet cars are where campaigns get skipped",
+        "Priced ~15K under 2019 comparables because of the mileage, not despite it"
+      ],
+      "openItems": [
+        "Pull the CarSwitch inspection PDF + service record before spending any more time on it"
+      ],
+      "verdict": "Hard to defend under the new repair caps at 199.7K km. Only path: inspection report + service record are both clean AND recalls verified done."
+    },
+    {
+      "id": "c4",
+      "title": "2020 Mazda 6 2.5L — CarSwitch #862053, 93,900 km",
+      "status": "active",
+      "stars": 4,
+      "stage": "Qualified",
+      "sellerName": "",
+      "source": "Switch",
+      "photo": "",
       "priceAED": 39000,
       "vin": "",
       "location": "Dubai (CarSwitch)",
       "facts": [
-        "~200,000 km",
-        "2019 = check rocker-arm campaign + Denso recall at Galadari"
+        "93,900 km ≈ 15,600 km/yr — normal private use, not fleet",
+        "Inspected + certified; platform's own valuation rates the price 'Fair'",
+        "Sold comparables support an offer of AED 35–36K",
+        "Everything that made cheap listings suspicious is absent here"
       ],
-      "openItems": [],
-      "verdict": "Low rank: high mileage + high capital + worse year-end resale for a one-year plan. Watch only."
+      "openItems": [
+        "Over the 35K ceiling at ask — test whether 35–36K offer lands",
+        "Request inspection report + ownership history from CarSwitch"
+      ],
+      "verdict": "Strongest car on the repair-cap logic: low km + inspection = best odds of fitting ≤5K/yr1 + ≤5K/yrs2–4. The constraint is capital, not the car."
     },
     {
       "id": "d1",
       "title": "Azhar's 2017 S Grade — AED 24,500 / 157K km",
       "status": "dead",
       "priceAED": 24500,
+      "sellerName": "Azhar",
+      "source": "—",
+      "photo": "",
       "deadReason": "Sold to another buyer."
     },
     {
@@ -91,6 +129,8 @@
       "title": "Al Jada 2017 — AED 30K (AutoTrust documented)",
       "status": "dead",
       "priceAED": 30000,
+      "source": "—",
+      "photo": "",
       "deadReason": "Sharjah registration — hard exclusion. Car quality was fine; do not re-evaluate."
     },
     {
@@ -98,6 +138,8 @@
       "title": "2015 Mazda 6 — AED 19,500",
       "status": "dead",
       "priceAED": 19500,
+      "source": "—",
+      "photo": "",
       "deadReason": "2.0L engine, fails hard rule."
     }
   ],
@@ -115,12 +157,13 @@
     "Pre-2016 torque converter shudder = inspection/negotiation flag on high-km cars, not a disqualifier.",
     "Colleagues' Mazda reliability objections apply to pre-2012, not Skyactiv era; their Maxima CVT suggestion fails their own logic.",
     "Seller urgency ('another viewer coming') → neutral, non-committal response. Never show interest level.",
-    "WhatsApp qualification template before any visit: service records, engine bay photo, accident history, loan status, ownership story. Chassis number requested as routine."
+    "WhatsApp qualification template before any visit: service records, engine bay photo, accident history, loan status, ownership story. Chassis number requested as routine.",
+    "Unplanned roadside failure 300 km from home is a different category of risk than budgeted repairs — weight documented history accordingly."
   ],
   "decisions": [
     {
       "date": "2026-07",
-      "text": "Locked target: Mazda 6 2.5L Skyactiv-G, GCC, 2016–2018 preferred (2016–17 sweet spot).",
+      "text": "Locked target: Mazda 6 2.5L Skyactiv-G, GCC.",
       "scope": "global",
       "src": "seed"
     },
@@ -132,20 +175,8 @@
     },
     {
       "date": "2026-08",
-      "text": "Strategy pivot: one-year bridge purchase ~AED 18–22K with 5–10K repair reserve, instead of 28–35K keeper.",
-      "scope": "global",
-      "src": "seed"
-    },
-    {
-      "date": "2026-08",
       "text": "Rented Mazda 6 (2024/25 base) via eZhire as reference baseline.",
       "scope": "global",
-      "src": "seed"
-    },
-    {
-      "date": "2026-08",
-      "text": "c1 (2015 Dubai, AED 22K) made PRIMARY candidate; offer 18.5–19.5K if AutoTrust clean.",
-      "scope": "c1",
       "src": "seed"
     },
     {
@@ -165,6 +196,18 @@
       "text": "Al Jada 2017 dropped on Sharjah exclusion, not car quality.",
       "scope": "d2",
       "src": "seed"
+    },
+    {
+      "date": "2026-08-24",
+      "text": "Corrected record: CarSwitch 2019 is AED 27,000 / 199,700 km; the AED 39,000 car is the separate 2020 #862053 at 93,900 km.",
+      "scope": "global",
+      "src": "seed"
+    },
+    {
+      "date": "2026-08-25",
+      "text": "Budget redefined: repairs ≤ AED 5,000 in year 1 AND ≤ AED 5,000 total years 2–4. Replaces strict one-year-bridge framing; horizon now flexible 1–4 yrs.",
+      "scope": "global",
+      "src": "atir"
     }
   ],
   "nextActions": [
@@ -185,6 +228,11 @@
     },
     {
       "id": "n4",
+      "text": "Request inspection report + ownership history for CarSwitch #862053 (2020)",
+      "done": false
+    },
+    {
+      "id": "n5",
       "text": "Keep monitoring Dubizzle / FB Marketplace / CarSwitch / Dubicars / Al Aweer",
       "done": false
     }
