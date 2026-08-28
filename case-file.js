@@ -488,19 +488,30 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
       history.push({ role: "assistant", content: t.a });
     });
 
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true"
-      },
-      body: JSON.stringify({
-        model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT,
-        messages: [...history, { role: "user", content }]
-      })
-    });
+    const ctrl = new AbortController();
+    const killer = setTimeout(() => ctrl.abort(), 90000);
+    let res;
+    try {
+      res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        signal: ctrl.signal,
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: JSON.stringify({
+          model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT,
+          messages: [...history, { role: "user", content }]
+        })
+      });
+    } catch (e) {
+      clearTimeout(killer);
+      if (e.name === "AbortError") return { error: "Timed out after 90s. Check your connection and try again." };
+      return { error: "Couldn't reach the API — this is usually no internet, or the request was blocked by the browser. Try again on a different connection." };
+    }
+    clearTimeout(killer);
     if (res.status === 401) {
       localStorage.removeItem(LS.apiKey);
       const nk = prompt("That API key was rejected (401). Paste a valid Anthropic API key — get one at console.anthropic.com → API Keys (starts with sk-ant-):");
@@ -689,9 +700,10 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
   .cf-gar .gm{color:var(--mut);font-size:12px;margin-top:2px}
   .cf-gar a{color:var(--accent);font-weight:700;text-decoration:none}
   .cf-foot{font-size:11px;color:var(--mut);margin:4px 0 10px}
-  .cf-ask textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;resize:vertical}
+  #cfViewAsk textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:10px;padding:12px;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;resize:vertical;background:#fff;display:block}
+  #cfViewAsk textarea:focus{outline:none;border-color:var(--accent)}
   .cf-askrow{display:flex;gap:6px;margin:8px 0}
-  .cf-askrow select{flex:1;padding:9px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+  .cf-askrow select{flex:1;padding:9px;border:1px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;background:#fff}
   .cf-btn{padding:10px 14px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;font-size:14px}
   .cf-btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
   .cf-btn:disabled{opacity:.5}
@@ -1009,9 +1021,25 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
     const scope = $("cfScope").value;
     if (!q && !pendingImages.length) return;
     $("cfAskBtn").disabled = true;
-    $("cfOut").innerHTML = `<div class="cf-load">Thinking… (brief + ${pendingImages.length} photo${pendingImages.length === 1 ? "" : "s"} sent)</div>`;
-    const r = await askClaude(q, scope);
-    $("cfAskBtn").disabled = false;
+    const n = pendingImages.length;
+    let secs = 0;
+    $("cfOut").innerHTML = `<div class="cf-load" id="cfTick">Thinking… (brief + ${n} photo${n === 1 ? "" : "s"}) — 0s</div>`;
+    const tick = setInterval(() => {
+      secs++;
+      const el = $("cfTick");
+      if (el) el.textContent = `Thinking… (brief + ${n} photo${n === 1 ? "" : "s"}) — ${secs}s`;
+    }, 1000);
+
+    let r;
+    try {
+      r = await askClaude(q, scope);
+    } catch (e) {
+      console.error(e);
+      r = { error: "Something broke while asking: " + (e.message || e) };
+    } finally {
+      clearInterval(tick);
+      $("cfAskBtn").disabled = false;
+    }
     if (r.error) { $("cfOut").innerHTML = `<div class="cf-ans">⚠ ${esc(r.error)}</div>`; return; }
 
     lastAskImages = pendingImages.slice();
