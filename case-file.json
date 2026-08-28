@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-08-28T01:37:13.510Z",
+  "updatedAt": "2026-08-28T01:37:20.712Z",
   "mission": "Used Mazda 6 2.5L Skyactiv-G, GCC, 2015–2020 for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Horizon: flexible 1–4 years, governed by the repair caps below. Charger/Mustang deferred to year three.",
   "hardRules": [
     "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
@@ -59,13 +59,16 @@
         "5-year single ownership, bought from Al Futtaim",
         "Loan cleared",
         "Disclosed: bumper repaints, axle replacement, shock absorbers + mounting work",
-        "No service records"
+        "No service records",
+        "Engine bay photo received: Skyactiv confirmed, heavy dust but no visible oil seepage or missing covers"
       ],
       "openItems": [
-        "Engine bay photo still pending — get it BEFORE committing to visit",
-        "Visit being arranged for Tue/Wed evening"
+        "Visit being arranged for Tue/Wed evening",
+        "Book mobile PPI inspector (Inspect Motors or Checkmycar) to attend visit",
+        "Push for any service records / Galadari stamps at visit",
+        "Confirm Tue/Wed evening time with Greeshma"
       ],
-      "verdict": "Over ceiling at ask. Anchor AED 30–31K from her own disclosures. Recent suspension work helps the repair-cap case; missing records hurt it."
+      "verdict": "Visit unblocked. Over ceiling at AED 36K — anchor AED 30–31K. Missing service records remain the key repair-cap risk. Bring mobile PPI inspector to the visit."
     },
     {
       "id": "c3",
