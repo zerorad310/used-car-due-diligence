@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-08-28T01:35:05.499Z",
+  "updatedAt": "2026-08-28T01:37:13.510Z",
   "mission": "Used Mazda 6 2.5L Skyactiv-G, GCC, 2015–2020 for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Horizon: flexible 1–4 years, governed by the repair caps below. Charger/Mustang deferred to year three.",
   "hardRules": [
     "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
@@ -219,7 +219,7 @@
     {
       "id": "n2",
       "text": "Chase Greeshma for engine bay photo (blocker for visit)",
-      "done": false
+      "done": true
     },
     {
       "id": "n3",
