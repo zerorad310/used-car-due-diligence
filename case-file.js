@@ -501,6 +501,12 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
         messages: [...history, { role: "user", content }]
       })
     });
+    if (res.status === 401) {
+      localStorage.removeItem(LS.apiKey);
+      const nk = prompt("That API key was rejected (401). Paste a valid Anthropic API key — get one at console.anthropic.com → API Keys (starts with sk-ant-):");
+      if (nk && nk.trim()) { localStorage.setItem(LS.apiKey, nk.trim()); return askClaude(question, scopeId); }
+      return { error: "API key rejected and cleared. Tap ⚙️ (top right) → Claude API key to set a valid one." };
+    }
     if (!res.ok) return { error: `API error ${res.status}: ${await res.text()}` };
     const data = await res.json();
     const full = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n");
@@ -613,9 +619,12 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
   }
 
   function promptForKey() {
-    const k = prompt("Claude API key (stored on this device only):");
-    if (k) localStorage.setItem(LS.apiKey, k.trim());
-    return k ? k.trim() : null;
+    const k = prompt("Anthropic API key (stored on this device only).\nGet it at console.anthropic.com → API Keys — it starts with sk-ant-.\nNote: this is NOT your claude.ai login or GitHub token.");
+    if (!k || !k.trim()) return null;
+    const t = k.trim();
+    if (!t.startsWith("sk-ant-")) alert("Warning: Anthropic API keys start with sk-ant-. Saved anyway — if the call fails with 401, tap ⚙️ to fix it.");
+    localStorage.setItem(LS.apiKey, t);
+    return t;
   }
 
   /* --------------------------------------------------------------------- UI */
@@ -632,6 +641,7 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
   .cf-dot{width:8px;height:8px;border-radius:50%;background:#9ca3af;flex:none}
   .cf-dot.synced{background:#16a34a}.cf-dot.saving{background:#f59e0b}.cf-dot.error{background:#dc2626}.cf-dot.notoken{background:#9ca3af}
   .cf-status{font-size:12px;color:var(--mut)}
+  #cfGear{margin-left:auto;background:none;border:none;font-size:17px;padding:4px 6px;cursor:pointer}
   .cf-banner{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
   .cf-tabs{display:flex;gap:6px;margin-bottom:12px}
   .cf-tabs button{flex:1;padding:10px 0;border:1px solid var(--line);background:#fff;border-radius:10px;font-size:14px;font-weight:600;color:var(--mut)}
@@ -699,7 +709,14 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
   const styleEl = document.createElement("style"); styleEl.textContent = css; document.head.appendChild(styleEl);
 
   root.innerHTML = `
-    <div class="cf-head"><div class="cf-dot" id="cfDot"></div><h2>Case File</h2><span class="cf-status" id="cfStatus"></span></div>
+    <div class="cf-head"><div class="cf-dot" id="cfDot"></div><h2>Case File</h2><span class="cf-status" id="cfStatus"></span><button id="cfGear" title="Keys">⚙️</button></div>
+    <div id="cfSettings" style="display:none">
+      <div class="cf-banner"><span>Update stored keys for this device.</span></div>
+      <div class="cf-askrow">
+        <button class="cf-btn ghost" id="cfSetApi" style="flex:1">Claude API key</button>
+        <button class="cf-btn ghost" id="cfSetGh" style="flex:1">GitHub token</button>
+      </div>
+    </div>
     <div id="cfBanners"></div>
     <div class="cf-tabs">
       <button id="cfTabFile" class="on">Case file</button>
@@ -721,6 +738,32 @@ Include ONLY keys with content. These render as tap-to-commit chips; be precise 
 
   const $ = (id) => document.getElementById(id);
   let coverTarget = null;
+
+  /* Settings (⚙️): update keys any time */
+  $("cfGear").onclick = () => {
+    const s = $("cfSettings");
+    s.style.display = s.style.display === "none" ? "" : "none";
+  };
+  $("cfSetApi").onclick = () => {
+    const cur = localStorage.getItem(LS.apiKey);
+    const k = prompt("Anthropic API key from console.anthropic.com (starts with sk-ant-):" + (cur ? "\nCurrently set: " + cur.slice(0, 12) + "…" : ""));
+    if (k === null) return;
+    const t = k.trim();
+    if (!t) { localStorage.removeItem(LS.apiKey); alert("API key cleared."); return; }
+    if (!t.startsWith("sk-ant-")) alert("Warning: Anthropic API keys start with sk-ant-. Saved anyway — if calls fail, double-check you copied it from console.anthropic.com → API Keys.");
+    localStorage.setItem(LS.apiKey, t);
+    alert("API key updated.");
+    $("cfSettings").style.display = "none";
+  };
+  $("cfSetGh").onclick = () => {
+    const t = prompt("GitHub fine-grained token (Contents read/write on " + GH.repo + "):");
+    if (t === null) return;
+    const v2 = t.trim();
+    if (!v2) { localStorage.removeItem(LS.ghToken); syncStatus = "notoken"; renderStatus(); return; }
+    localStorage.setItem(LS.ghToken, v2);
+    ghGet().then(() => ghPut()).catch(() => ghPut());
+    $("cfSettings").style.display = "none";
+  };
 
   $("cfCoverIn").onchange = async (e) => {
     const f = e.target.files[0]; e.target.value = "";
