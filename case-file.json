@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-08-28T01:41:09.815Z",
+  "updatedAt": "2026-08-28T00:38:53.751Z",
   "mission": "Used Mazda 6 2.5L Skyactiv-G, GCC, 2015–2020 for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Horizon: flexible 1–4 years, governed by the repair caps below. Charger/Mustang deferred to year three.",
   "hardRules": [
     "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
@@ -59,16 +59,13 @@
         "5-year single ownership, bought from Al Futtaim",
         "Loan cleared",
         "Disclosed: bumper repaints, axle replacement, shock absorbers + mounting work",
-        "No service records",
-        "Engine bay photo received: Skyactiv confirmed, heavy dust but no visible oil seepage or missing covers"
+        "No service records"
       ],
       "openItems": [
-        "Visit being arranged for Tue/Wed evening",
-        "Book mobile PPI inspector (Inspect Motors or Checkmycar) to attend visit",
-        "Push for any service records / Galadari stamps at visit",
-        "Confirm Tue/Wed evening time with Greeshma"
+        "Engine bay photo still pending — get it BEFORE committing to visit",
+        "Visit being arranged for Tue/Wed evening"
       ],
-      "verdict": "Visit unblocked. Over ceiling at AED 36K — anchor AED 30–31K. Missing service records remain the key repair-cap risk. Bring mobile PPI inspector to the visit."
+      "verdict": "Over ceiling at ask. Anchor AED 30–31K from her own disclosures. Recent suspension work helps the repair-cap case; missing records hurt it."
     },
     {
       "id": "c3",
@@ -222,7 +219,7 @@
     {
       "id": "n2",
       "text": "Chase Greeshma for engine bay photo (blocker for visit)",
-      "done": true
+      "done": false
     },
     {
       "id": "n3",
@@ -241,18 +238,5 @@
     }
   ],
   "summary": "",
-  "qa": {
-    "general": [
-      {
-        "q": "",
-        "a": "**Image classified: WhatsApp chat screenshot — Greeshma's 2016 Mazda 6 (c2)**\n\n---\n\n**Engine bay verdict: ACCEPTABLE — but not clean**\n\nWhat I can see:\n- ✅ Mazda Skyactiv badge confirmed — right engine\n- ✅ No obvious oil seepage on visible surfaces\n- ✅ No corroded terminals or mismatched components visible\n- ⚠️ **Very dusty/grimy** — she acknowledged it herself (\"must get the car washed\")\n- ⚠️ Grime buildup makes it harder to spot slow seeps or hairline cracks — this is exactly why a mobile PPI inspector matters; they'll degrease and look properly\n- ✅ No missing covers, no aftermarket nonsense visible\n\n**The dust is cosmetic, not a red flag on its own.** But it's a reason to not skip the independent inspection.\n\n---\n\n**Key update: visit is now on the table**\n\nShe's invited you to come see it. Engine bay photo obligation — which was your blocker — is now **partially fulfilled** (enough to proceed to visit, not enough to skip PPI).\n\n**Next move:**\nReply to confirm a visit time. Suggested message:\n\n> *\"Thanks for sending! Looks good. I'm free Tuesday or Wednesday evening — what works for you? I'll plan to bring an inspector along if that's okay, just my usual process for any car I'm serious about.\"*\n\nBooking a mobile inspector (Inspect Motors or Checkmycar) to meet you there is the right call — saves a second trip.\n\n---\n\n**Repair-cap reminder going into the visit:**\nNo service records = the unknown that blows the cap. Push hard on paperwork when you're there. Even partial Galadari dealer stamps help.",
-        "ts": 1787880905499
-      },
-      {
-        "q": "Correction on your interpretation of greeshma’s update. The chat is on dubizzle and not WhatsApp. Secondly, should I speak about mobile inspection or inspection at the service centre? Last garage I called was i think of Galadari itself and they said we’ll have to bring the car there and that too in the morning. So now tell me whether I should ask for inspector at her building or garage?",
-        "a": "**Verdict: Mobile inspector at her building. No contest.**\n\n---\n\n**Why not Galadari for the pre-purchase check:**\n- Galadari confirmed it themselves — car must come to them, morning only\n- You'd need Greeshma to agree to drive her car to Al Quoz before you've even made an offer\n- Most private sellers refuse this — kills the deal before it starts\n- Galadari's **only** irreplaceable role here is the **recall/campaign VIN check** — that's a phone call, not a visit\n\n**Why mobile PPI at her building wins:**\n- Inspector comes to Barsha Heights, you both meet there\n- ~AED 300, done in 45–60 min on the spot\n- You control the garage choice (not Dubizzle's inspector)\n- Greeshma has no reason to refuse — it's your money, your routine\n\n---\n\n**The right split:**\n\n| Task | Who | How |\n|---|---|---|\n| Mechanical PPI | Inspect Motors or Checkmycar | At her building |\n| Recall/rocker arm check | Galadari | VIN by phone/email only — no car needed |\n\nGaladari can confirm recall status on a VIN **without the car present** — call +971 4 419 9621, give them the VIN from the case file, ask if campaigns are open or closed.\n\n---\n\n**What to tell Greeshma (Dubizzle message):**\n\n> \"Great, looking forward to visiting. I bring a mobile inspector as part of my process for any car — they come to your location, takes about an hour, no cost to you. Works for Tue or Wed evening?\"\n\nWarm, routine, non-committal on price.\n\n---",
-        "ts": 1787881269815
-      }
-    ]
-  }
+  "qa": {}
 }
