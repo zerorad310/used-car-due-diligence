@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-08-29T14:37:53.255Z",
+  "updatedAt": "2026-10-11T14:41:01.843Z",
   "mission": "Used Mazda 6 2.5L Skyactiv-G, GCC, 2015–2020 for Atir. Daily Dubailand→Meydan (~35 km/day, Al Ain Rd) + road trips to Oman, Saudi, Al Ain with passengers. Realistic 19–20K km/yr. Horizon: flexible 1–4 years, governed by the repair caps below. Charger/Mustang deferred to year three.",
   "hardRules": [
     "GCC spec only — VIN prefix JM6/JM7 proceed, JM1 (US) reject. Check VIN before anything else.",
@@ -208,6 +208,12 @@
       "text": "Budget redefined: repairs ≤ AED 5,000 in year 1 AND ≤ AED 5,000 total years 2–4. Replaces strict one-year-bridge framing; horizon now flexible 1–4 yrs.",
       "scope": "global",
       "src": "atir"
+    },
+    {
+      "date": "2026-10-11",
+      "text": "Done: Request inspection report + ownership history for CarSwitch #862053 (2020)",
+      "scope": "global",
+      "src": "atir"
     }
   ],
   "nextActions": [
@@ -229,7 +235,7 @@
     {
       "id": "n4",
       "text": "Request inspection report + ownership history for CarSwitch #862053 (2020)",
-      "done": false
+      "done": true
     },
     {
       "id": "n5",
